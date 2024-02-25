@@ -1,0 +1,20 @@
+    <h1 style="text-align: center;">Welcome!</h1>
+    <p style="text-align: center;">Click the bulb to toggle the theme.</p>
+<div [ngClass]="{ 'dark-theme':isDarkTheme}" class="container" >
+    <div class="col-12" style="margin: auto;">
+            <div class="row">
+                <div *ngFor="let count of bulbCount" >
+                    <img  style="width: 100px;height: 100px;" id='bulb' [src]="isBulbOn? './../../../assets/bulblit.jpg': './../../../assets/bulb.jpg'" (click)="toggleBulb()"/>
+                </div>
+            </div>
+    </div>
+    <div class="col-12">
+        <button (click)="toggleTheme()" class="btn-success" >Toggle</button>
+    </div>
+</div>
+<div class="row" style="width: auto;">
+    <div style="margin: 20px;"><a [routerLink]="['/book_display']">Book Display</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_form">User Form</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_account">User Account</a></div>
+    <div style="margin: 20px;"><a routerLink="/bulb_theme_demo">Bulb Theme Demo</a></div>
+</div>

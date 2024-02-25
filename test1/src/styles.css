@@ -1,0 +1,194 @@
+/* You can add global styles to this file, and also import other style files */
+body, html{
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+* {
+    scrollbar-width: thin;
+}
+
+.vertical-navbar{
+    
+    background-color:white;
+    width: 130px;
+    height: auto;
+    border-radius: 15px;
+    padding: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    text-align: center;
+    justify-content: center;
+    overflow:scroll;
+
+}
+
+.vertical-navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.vertical-navbar li a{
+    display: block;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #333;
+}
+
+.vertical-navbar li a:hover{
+    background-color: #ddd;
+}
+
+.d-flex img{
+    width: 40px;
+    height: 40px;
+}
+.profileBox{
+    height: 70px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 1px;
+    margin: 5px;
+    background-color:#FFFFFF;
+    display: flex;
+    flex-direction: row;
+}
+
+.profileCircle{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 0;
+    font-size: 20px;
+    text-align: center;
+    background-color: blue;
+    color: black;
+}
+.profileBox a{
+    text-decoration: none;
+    color: black;
+}
+.profileBox p{
+    font-weight: 500;
+}
+
+.profileCircle p{
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+}
+
+.verticalBarBox{
+    text-align: center;
+    padding: 5px;
+    color: red;
+    height: 85px;
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    background-color: #93C8F8;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.leftVBarIcons{
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    border-radius: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    width: 60px;
+    height: 50px;
+    margin:auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: auto;
+}
+
+.leftVBarIcons a{
+    text-decoration: none;
+    color: black;
+    font-weight: 100;
+}
+
+.componentButton{
+    height: 50px;
+    width: 150px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 40px;
+    padding: 5px;
+    margin:1.3em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25empx;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.loginIcon{
+    width: 40px;
+    height: 40px;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 40px;
+    background-color: blue;
+    text-decoration: none;
+    justify-content: center;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.fixedNav{
+    height: 100%;
+    width: 45px;
+    z-index: 90;
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: blue;
+    padding-top: 50px;
+}
+
+.fixedNav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fixedNav ul li{
+    border-bottom: 1px solid #555;
+    background-color: blue;
+}
+
+.fixedNav ul li:hover{
+    background-color: white;
+}
+
+.centralContent{
+    height: auto;
+    margin: 0;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 60px;
+    background-color:#E2EBF5;
+    display: flex;
+    flex-direction: row;
+
+}

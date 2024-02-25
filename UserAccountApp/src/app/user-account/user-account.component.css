@@ -1,0 +1,35 @@
+.customSetting{
+    width: 90%;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+}
+
+.circleCharacter{
+    width: 50%;
+    height: 50%;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 50%;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    font-size:medium;
+    color: white;
+    overflow: hidden;
+    margin-left: 3px;
+}
+
+.theme2{
+    transition: background-color 0.5s;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding-top: 50px;
+}
+
+#bulb{
+    width: 100px;
+    cursor: pointer;
+}

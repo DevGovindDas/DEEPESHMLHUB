@@ -1,0 +1,29 @@
+<div class="container">
+<div class="col-12" style="margin:auto" >
+        <h1 style="text-align: center;margin-top: 10px;margin-bottom: 10px;">Welcome to the UserForm</h1>
+</div>
+</div>
+<form style="text-align: center;">
+    <label for="fn">FirstName</label>
+    <input type="text" id="fn" [(ngModel)]="firstName" name="firstName" placeholder="First Name"/>
+    <label for="ln">LastName</label>
+    <input type="text" id="ln" [(ngModel)]="lastName" name="lastName" placeholder="Last Name"/>
+</form>
+<hr>
+<br><br>
+<table style="margin: auto;" border="1">
+    <thead style="background-color: green;">
+        <th>First Name</th>
+        <th>Last Name</th>
+    </thead>
+    <tr>
+        <td>{{firstName}}</td>
+        <td>{{lastName}}</td>
+    </tr>
+</table>
+<div class="row" style="width: auto;">
+    <div style="margin: 20px;"><a [routerLink]="['/book_display']">Book Display</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_form">User Form</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_account">User Account</a></div>
+    <div style="margin: 20px;"><a routerLink="/bulb_theme_demo">Bulb Theme Demo</a></div>
+</div>

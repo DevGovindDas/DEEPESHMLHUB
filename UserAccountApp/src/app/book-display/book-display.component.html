@@ -1,0 +1,23 @@
+<p>book-display works!</p>
+<div class="col-12" *ngFor="let book of bookCartArray">
+    <table>
+        <thead>
+            <th>Book Image</th>
+            <th>Book Details</th>
+        </thead>
+        <tr>
+            <td><img src={{book.bookImg}} alt="No Image" style="height: 200px;width: 140px;"></td>
+            <td>
+                {{book.bookName}}<br>{{book.author}}<br>Kindle Price-{{book.kindlePrice}}<br>Paperback Price-{{book.paperbackPrice}}
+            </td>
+        </tr>
+    </table>
+    </div>
+<br>
+<button (click)="loadCart()">Load Cart</button>
+    <div class="row" style="width: auto;">
+        <div style="margin: 20px;"><a [routerLink]="['/book_display']">Book Display</a></div>
+        <div style="margin: 20px;"><a routerLink="/user_form">User Form</a></div>
+        <div style="margin: 20px;"><a routerLink="/user_account">User Account</a></div>
+        <div style="margin: 20px;"><a routerLink="/bulb_theme_demo">Bulb Theme Demo</a></div>
+    </div>

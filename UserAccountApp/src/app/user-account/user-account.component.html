@@ -1,0 +1,118 @@
+<p>user-account works!</p>
+<div class='container'>
+    <form class="row g-3">
+        <div style="text-align:center;" class="col-12">
+            <h1>Create a new account</h1>
+            <p>its quick and easy</p>
+            <hr>
+        </div>
+        <div class="col-md-6 customSetting">
+            <input type="text" [(ngModel)]="user.firstName" name="firstName" class="form-control " placeholder="First Name">
+        </div>
+        <div class="col-md-6 customSetting">
+            <input type="password" [(ngModel)]="user.surName" name="surName" class="form-control " placeholder="Surname">
+        </div>
+        <div class="col-12 customSetting">
+            <input type="text" [(ngModel)]="user.mobileEmail" name="mobileEmail" class="form-control "  placeholder="Mobile number or Email Address">
+        </div>
+        <div class="col-12 customSetting">
+            <input type="text" [(ngModel)]="user.password" name="password" class="form-control " placeholder="New Password">
+        </div>
+        <div class="col-12 customSetting">
+            <label style="margin-top: 10px;margin-bottom: 0;">Date of birth<span class="circleCharacter">?</span></label>
+        </div>
+        <div class="col-4 customSetting">
+                <select id="dayRangeDropDown" [(ngModel)]="user.dob.day" name="day" style="width: 100%">
+                    <option *ngFor="let day of days" [value]="day">{{day}}</option>
+                </select>
+        </div>
+        <div class="col-4 customSetting" >
+                <select id="dayRangeDropDown" [(ngModel)]="user.dob.month" name="month" style="width: 100%;">
+                    <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                </select>
+        </div>
+        <div class="col-4 customSetting" >
+                <select id="dayRangeDropDown" [(ngModel)]="user.dob.year" name="year" style="width: 100%;">
+                    <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                </select>
+        </div>
+
+       
+        <div class="col-12">
+            <label style="margin-top: 25px;margin-bottom:5px;padding-left: 0px;">Gender<span class="circleCharacter">?</span></label>
+        </div>
+        <div class="col-12 btn-group">
+                <div style="width: 33.33%;">
+                    <div style="border: black solid 1px; width: 94%; padding:7px;margin: auto;margin-left: 0% ;margin: top 0px;; border-radius: 5px;" >
+                        Male<input type="radio" [(ngModel)]="user.gender" name="gender" value="Male">
+                    </div>
+                </div>
+                <div style="width: 33.33%;">
+                    <div style="border: black solid 1px; width: 94%; padding:7px;margin: auto; ; border-radius: 5px;" >
+                        Female<input type="radio" [(ngModel)]="user.gender" name="gender" value="Female">
+                    </div>
+                </div>
+                <div style="width: 33.33%;">
+                <div style="border: black solid 1px; width: 94%; padding:7px;margin: auto ;margin-right: 0; border-radius: 5px;" >
+                    Custom<input type="radio" [(ngModel)]="user.gender" name="gender" value="Custom">
+                </div>
+                </div>
+        </div>
+        
+        <div class="col-12">
+            <br>
+        <p >People who use our service may have uploaded our contact information to Facebook. <a href="#">Learn more.</a></p>
+        
+        <p>By clicking Sign Up, you agree to our <a href="#">Terms, Privacy Policy</a> and <a href="#">Cookies Policy.</a> You may recieve sms notifications from us and can opt out at any time.</p>
+        <div class="col-12 btn">
+            <button type="submit" class="btn" style="background-color: #49B851;color: white;font-size: 1.25em;width: 10em; "><strong>Sign Up</strong></button>
+        </div>
+    </div>
+    <div style="margin: auto;">
+        <p ><a style="font-size: 1.5em;" href="#">Already have an account?</a></p>
+    </div>    
+    </form>
+</div>
+<hr style="border: black 1px solid;">
+<table border="1" style="margin: auto;margin-top: 20px;">
+    <thead style="background-color: #49B851;">
+        <th>First Name</th>
+        <th>SurName</th>
+        <th>Mobile/Email</th>
+        <th>Password</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+    </thead>
+    <tr>
+        <td>
+            {{user.firstName}}
+        </td>
+        <td>
+            {{user.surName}}
+        </td>
+        <td *ngIf="isValidMobileNo()||isValidEmail()">
+            {{user.mobileEmail}}
+        </td>
+        <td *ngIf="user.mobileEmail.length>0&&!isValidEmail()&&!isValidMobileNo()">
+            Not a valid Mobile or EmailId
+        </td>
+        <td *ngIf="user.mobileEmail==''">
+            
+        </td>
+        <td>
+            {{user.password}}
+        </td>
+        <td>
+            {{user.dob.day}}-{{user.dob.month}}-{{user.dob.year}}
+        </td>
+        <td>
+            {{user.gender}}
+        </td>
+    </tr>
+</table>
+<div class="row" style="width: auto;">
+    <div style="margin: 20px;"><a [routerLink]="['/book_display']">Book Display</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_form">User Form</a></div>
+    <div style="margin: 20px;"><a routerLink="/user_account">User Account</a></div>
+    <div style="margin: 20px;"><a routerLink="/bulb_theme_demo">Bulb Theme Demo</a></div>
+</div>
