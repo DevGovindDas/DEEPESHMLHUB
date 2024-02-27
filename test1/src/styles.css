@@ -12,7 +12,7 @@ body, html{
     
     background-color:white;
     width: 130px;
-    height: auto;
+    height:auto;
     border-radius: 15px;
     padding: auto;
     padding-top: 10px;
@@ -22,7 +22,7 @@ body, html{
     text-decoration: none;
     text-align: center;
     justify-content: center;
-    overflow:scroll;
+    overflow-y:scroll;
 
 }
 
@@ -113,13 +113,16 @@ body, html{
     margin-top: 5px;
     margin-bottom: 5px;
     padding: auto;
+    border: 0px;
 }
 
-.leftVBarIcons a{
-    text-decoration: none;
-    color: black;
-    font-weight: 100;
+.leftVIconimg{
+    width: 30px;
+    height: 30px;
+    border-radius: 1px;
+    object-fit: cover;
 }
+
 
 .componentButton{
     height: 50px;
@@ -159,7 +162,7 @@ body, html{
     position: fixed;
     top:0;
     left:0;
-    background-color: blue;
+    background-color:white;
     padding-top: 50px;
 }
 
@@ -179,7 +182,6 @@ body, html{
 }
 
 .centralContent{
-    height: auto;
     margin: 0;
     margin-left: 30px;
     margin-right: 30px;
@@ -191,4 +193,13 @@ body, html{
     display: flex;
     flex-direction: row;
 
+}
+
+.componentImg{
+    max-width: 30px;
+    max-height: 30px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 0;
+    margin-left: 5px;
 }

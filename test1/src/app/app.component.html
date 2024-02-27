@@ -1,98 +1,69 @@
+<div class="navbar navbar-expand-lg navbar-light bg-light" style="height:60px;padding-top: 0px;padding-left: 70px;padding-right: 50px;display: flex;">
+  <div class="navbar-brand" >
+    <a href="#"><img src="../assets/logo_hub.png" style="width: 100px;" alt="Gss1Hub"></a>
+  </div>
+  <div class="collapse navbar-collapse" style="flex: 1;display: flex;" id="mynavbar">
+    <ul class="navbar-nav" style="flex: 1;">
+      <li class="nav-item" style="margin: auto;">
+        <a class="nav-link"   href="#"><img src="../assets/MetLife.png" alt="metlife-logo"></a>
+      </li>
+    </ul> 
+    <form  style="display: flex;flex-direction: row;">
+      <input class="form-control" style="border-radius: 20px;justify-content: center;margin: auto;width: 160px;height: 30px;" type="text" placeholder="Search...">
+      <a href="#"><img src="../assets/OIP.jpg" style="height: 2.5em;"></a>
+      <a style="display: flex;text-decoration: none;justify-content: center;align-items: center;" href="#"><span style="color: black;font-size: 15px;font-weight: 500;margin: 10px;">Deepesh Saini</span>
+      <div class="loginIcon" >DS</div></a>
+    </form> 
+  </div>   
+</div>
+
 <div class="container-fluid" style="display: flex;flex-direction: column;overflow-y: auto;" >
-      <div class="navbar navbar-expand-lg navbar-light bg-light navbar-custom " style="height:60px;padding-top: 0px;padding-left: 70px;padding-right: 50px;display: flex;">
-            <div class="navbar-brand" >
-              <a href="#"><img src="../assets/logo_hub.png" style="width: 100px;" alt="Gss1Hub"></a>
-            </div>
-            <div class="collapse navbar-collapse" style="flex: 1;display: flex;" id="mynavbar">
-              <ul class="navbar-nav" style="flex: 1;">
-                <li class="nav-item" style="margin: auto;">
-                  <a class="nav-link"   href="#"><img src="../assets/MetLife.png" alt="metlife-logo"></a>
-                </li>
-              </ul> 
-              <form  style="display: flex;flex-direction: row;">
-                <input class="form-control" style="border-radius: 20px;justify-content: center;margin: auto;width: 160px;height: 30px;" type="text" placeholder="Search...">
-                <a href="#"><img src="../assets/OIP.jpg" style="height: 2.5em;"></a>
-                <a style="display: flex;text-decoration: none;justify-content: center;align-items: center;" href="#"><span style="color: black;font-size: 15px;font-weight: 500;margin: 10px;">Deepesh Saini</span>
-                <div class="loginIcon" >DS</div></a>
-              </form> 
-            </div>   
-      </div>
- <div>
       <div [ngClass]="{'centralContent':true}" [style.height.px]="centralComponentHeight">
-      <div class="vertical-navbar" >
-        <div class="leftVBarIcons" >
-            <a  [routerLink]="['/facilities']" >
-            <i class="fa fa-envelope-open" ></i><p style="font-size: 10px;text-align: center;">Facilities</p></a>
-        </div>
-        <div class="leftVBarIcons">
-            <a  [routerLink]="['/finance']">
-            <i class="fa fa-usd"  ></i><p style="font-size: 10px;text-align: center;">Finance</p></a>
-        </div>
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/governance']">
-          <i class="fa fa-eye"  ></i><p style="font-size: 10px;text-align: center;">Governance</p></a>
-        </div>   
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/hr']">
-          <i class="fa fa-users"  ></i><p style="font-size: 10px;text-align: center;">HR</p></a>
-        </div>
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/it']">
-          <i class="fa fa-window-maximize"  ></i><p style="font-size: 10px;text-align: center;">IT</p></a>
+          <div class="vertical-navbar" >
+                <div *ngFor="let department of departments" >
+                <button type="button" class="leftVBarIcons" (click)="handle_department_imgclick(department.label)">
+                  <img class="leftVIconimg" [src]="department.icon" (click)="handle_department_imgclick(department.label)"><p style="font-size: 10px;text-align: center;">{{department.label}}</p>
+                </button>
+              </div>
           </div>
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/migrations']">
-          <i class="fa fa-bicycle"  ></i><p style="font-size: 10px;text-align: center;">Migrations</p></a>
-        </div> 
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/quality']">
-          <i class="fa fa-balance-scale"  ></i><p style="font-size: 10px;text-align: center;">Quality</p></a>
-        </div>
-        <div class="leftVBarIcons" >
-          <a  [routerLink]="['/favourite']">
-          <i class="fa fa-heart"  ></i><p style="font-size: 10px;text-align: center;">Favourite</p></a>
-        </div>     
-      </div>
       <div style="flex:1;padding: 20px;overflow-y: scroll;" >
-          <router-outlet></router-outlet>
+          <div class="row">
+              <a *ngFor="let component of selected_components" class="componentButton d-flex" style="text-decoration: none; color: black;" href="#">
+                <div class="col-2" style="align-items:start;margin: auto;margin-left: 0;margin-right: 0;">
+                <img class="componentImg" [src]="component.icon" >
+                </div>
+                <p style="margin: auto;flex:1;margin-left: 10px;word-wrap:break-word;">{{component.label}}</p>
+              </a>
+          </div>
       </div>
       <div style="display: flex;flex-direction: column;">
-        <div class="verticalBarBox">
-          <h2>Y[our]</h2>
-          <h6><i> Journey</i></h6>
-        </div>
-        <hr style="border: 3px solid;color:white;  opacity: 100 ;width: 130px;margin: 0;padding: 0;">
-        <div ngClass="vertical-navbar" style="background-color: #93C8F8;border-top-left-radius: 0;border-top-right-radius: 0;">
-              <div class="profileBox" >
-                <a [routerLink]="['/']">
-                <div class="profileCircle">VY</div><p style="text-align: center;"><strong>Vyom Vashista</strong><br>Completing 5 Years</p></a>
+          <div class="verticalBarBox">
+            <img src="../assets/journey.png">
+          </div>
+          <hr style="border: 3px solid;color:white;  opacity: 100 ;width: 130px;margin: 0;padding: 0;">
+          <div ngClass="vertical-navbar" style="background-color: #93C8F8;border-top-left-radius: 0;border-top-right-radius: 0;">
+
+              <div *ngFor="let journey of journeys" class="profileBox" >
+                <a href="#">
+                    <div>
+                        <img *ngIf="journey.image.length!=0;else elseBlock" class="profileCircle" style="object-fit: cover;margin: auto;" src={{journey.image}} />
+                        <ng-template #elseBlock>
+                          <div class="profileCircle">{{short_name(journey.name)}}</div>
+                        </ng-template>
+                    </div>
+                    <p style="text-align: center;"><strong>{{journey.name}}</strong><br>Completing {{journey.experience}} Years</p>
+                </a>
               </div>
-              <div class="profileBox" >
-                <a [routerLink]="['/']">
-                <div class="profileCircle">VY</div><p style="text-align: center;"><strong>Vyom Vashista</strong><br>Completing 5 Years</p></a>
-              </div>
-              <div class="profileBox" >
-                <a [routerLink]="['/']">
-                <div class="profileCircle">VY</div><p style="text-align: center;"><strong>Vyom Vashista</strong><br>Completing 5 Years</p></a>
-              </div>
-              <div class="profileBox" >
-                <a [routerLink]="['/']">
-                <div class="profileCircle">VY</div><p style="text-align: center;"><strong>Vyom Vashista</strong><br>Completing 5 Years</p></a>
-              </div>
-              <div class="profileBox" >
-                <a [routerLink]="['/']">
-                <div class="profileCircle">VY</div><p style="text-align: center;"><strong>Vyom Vashista</strong><br>Completing 5 Years</p></a>
-              </div>
-                <a style="text-align: center;text-decoration: none;" [routerLink]="['/hr']">
-                <p >View All</p></a>
+              <a style="text-align: center;text-decoration: none;" [routerLink]="['/hr']">
+              <p >View All</p></a>
           </div>
       </div> 
     </div> 
     <div  style="height: 25px;width: 100%;background-color: white;display: flex;">
-      <div style="flex: 1;width: auto;"></div><div><p>© Powered By GSS IT. All Rights Reserved</p></div>
+      <div style="flex: 1;width: auto;"></div><div><p>© Powered By GSS IT. All Rights Reserved</p>
+      </div>
     </div>
-    </div>
-  </div>
+</div>
 
 <button (click)="visibleNav()" title="dropdownMenu" type="button" class="btn btn-secondray" 
       id="dropdownMenuButton" style="padding: 0px;position: fixed;z-index: 100;left: 0;top: 0;">
@@ -101,13 +72,13 @@
       <div class="fixedNav" *ngIf="fixedNavVisible">
         <ul>
           <li>
-            <a   href="#"><i class="fa fa-th"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+            <a   href="#"><i class="fa fa-globe"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
           </li>
           <li>
-            <a   href="#"><i class="fa fa-th"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+            <a   href="#"><i class="fa fa-book"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
           </li>
           <li>
-            <a   href="#"><i class="fa fa-th"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+            <a   href="#"><i class="fa fa-mobile"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
           </li>
         </ul>
       </div>
