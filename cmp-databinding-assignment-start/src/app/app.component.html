@@ -15,8 +15,16 @@
     </div>
     <app-game-control (numEmitter)="handleNumEmitter($event)"></app-game-control>
     <div style="display: flex;flex-direction: row;">
-      <div class="col-xs-6"><app-odd></app-odd></div>
-      <div class="col-xs-6"><app-even></app-even></div>
+      <div class="col-xs-6">
+        <div *ngFor="let num of oddArray">
+          <app-odd [num]="num"></app-odd>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div *ngFor="let num of evenArray">
+          <app-even [num]="num" ></app-even>
+        </div>
+      </div>
     </div>
   </div>
 </div>
