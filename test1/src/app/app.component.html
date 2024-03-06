@@ -1,85 +1,77 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light" style="height:60px;padding-top: 0px;padding-left: 70px;padding-right: 50px;display: flex;">
-  <div class="navbar-brand" >
-    <a href="#"><img src="../assets/logo_hub.png" style="width: 100px;" alt="Gss1Hub"></a>
-  </div>
-  <div class="collapse navbar-collapse" style="flex: 1;display: flex;" id="mynavbar">
-    <ul class="navbar-nav" style="flex: 1;">
-      <li class="nav-item" style="margin: auto;">
-        <a class="nav-link"   href="#"><img src="../assets/MetLife.png" alt="metlife-logo"></a>
-      </li>
-    </ul> 
-    <form  style="display: flex;flex-direction: row;">
-      <input class="form-control" style="border-radius: 20px;justify-content: center;margin: auto;width: 160px;height: 30px;" type="text" placeholder="Search...">
-      <a href="#"><img src="../assets/OIP.jpg" style="height: 2.5em;"></a>
-      <a style="display: flex;text-decoration: none;justify-content: center;align-items: center;" href="#"><span style="color: black;font-size: 15px;font-weight: 500;margin: 10px;">Deepesh Saini</span>
-      <div class="loginIcon" >DS</div></a>
-    </form> 
-  </div>   
-</div>
-
-<div class="container-fluid" style="display: flex;flex-direction: column;overflow-y: auto;" >
-      <div [ngClass]="{'centralContent':true}" [style.height.px]="centralComponentHeight">
-          <div class="vertical-navbar" >
-                <div *ngFor="let department of departments" >
-                <button type="button" class="leftVBarIcons" (click)="handle_department_imgclick(department.label)">
-                  <img class="leftVIconimg" [src]="department.icon" (click)="handle_department_imgclick(department.label)"><p style="font-size: 10px;text-align: center;">{{department.label}}</p>
-                </button>
-              </div>
-          </div>
-      <div style="flex:1;padding: 20px;overflow-y: scroll;" >
-          <div class="row">
-              <a *ngFor="let component of selected_components" class="componentButton d-flex" style="text-decoration: none; color: black;" href="#">
-                <div class="col-2" style="align-items:start;margin: auto;margin-left: 0;margin-right: 0;">
-                <img class="componentImg" [src]="component.icon" >
-                </div>
-                <p style="margin: auto;flex:1;margin-left: 10px;word-wrap:break-word;">{{component.label}}</p>
-              </a>
-          </div>
+<div style="display: flex;flex-direction: column;overflow-y: auto;" >
+    <div class="navbar navbar-expand-lg navbar-light bg-light col-12" style="z-index: 98;flex: 1;padding-top: 0px;padding-left: 70px;padding-right: 50px;display: flex;margin: 0;">
+      <div class="navbar-brand" >
+        <a href="#"><img src="../assets/logo_hub.png" style="width: 100px;" alt="Gss1Hub"></a>
       </div>
-      <div style="display: flex;flex-direction: column;">
-          <div class="verticalBarBox">
-            <img src="../assets/journey.png">
-          </div>
-          <hr style="border: 3px solid;color:white;  opacity: 100 ;width: 130px;margin: 0;padding: 0;">
-          <div ngClass="vertical-navbar" style="background-color: #93C8F8;border-top-left-radius: 0;border-top-right-radius: 0;">
-
-              <div *ngFor="let journey of journeys" class="profileBox" >
-                <a href="#">
-                    <div>
-                        <img *ngIf="journey.image.length!=0;else elseBlock" class="profileCircle" style="object-fit: cover;margin: auto;" src={{journey.image}} />
-                        <ng-template #elseBlock>
-                          <div class="profileCircle">{{short_name(journey.name)}}</div>
-                        </ng-template>
-                    </div>
-                    <p style="text-align: center;"><strong>{{journey.name}}</strong><br>Completing {{journey.experience}} Years</p>
-                </a>
-              </div>
-              <a style="text-align: center;text-decoration: none;" [routerLink]="['/hr']">
-              <p >View All</p></a>
-          </div>
-      </div> 
-    </div> 
-    <div  style="height: 25px;width: 100%;background-color: white;display: flex;">
-      <div style="flex: 1;width: auto;"></div><div><p>© Powered By GSS IT. All Rights Reserved</p>
-      </div>
+      <div class="collapse navbar-collapse" style="flex: 1;display: flex;" id="mynavbar">
+        <ul class="navbar-nav" style="flex: 1;">
+          <li class="nav-item" style="margin: auto;">
+            <a class="nav-link"   href="#"><img src="../assets/MetLife.png" alt="metlife-logo"></a>
+          </li>
+        </ul> 
+        <form  style="display: flex;flex-direction: row;">
+          <input class="form-control" style="border-radius: 20px;justify-content: center;margin: auto;width: 160px;height: 30px;" type="text" placeholder="Search...">
+          <a href="#"><img src="../assets/OIP.jpg" style="height: 2.5em;"></a>
+          <a  style="display: flex;text-decoration: none;justify-content: center;align-items: center;" href="#"><span (click)="userProfileDetailsClick()" style="color: black;font-size: 15px;font-weight: 500;margin: 10px;">Deepesh Saini</span>
+          <div class="loginIcon" (click)="userProfileDetailsClick()">DS</div></a>
+        </form> 
+      </div>   
     </div>
+    <div style="flex:1;">
+      <router-outlet></router-outlet>
+    </div>
+
 </div>
 
 <button (click)="visibleNav()" title="dropdownMenu" type="button" class="btn btn-secondray" 
       id="dropdownMenuButton" style="padding: 0px;position: fixed;z-index: 100;left: 0;top: 0;">
           <i class="fa fa-th"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i>
-      </button>
-      <div class="fixedNav" *ngIf="fixedNavVisible">
-        <ul>
-          <li>
-            <a   href="#"><i class="fa fa-globe"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
-          </li>
-          <li>
-            <a   href="#"><i class="fa fa-book"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
-          </li>
-          <li>
-            <a   href="#"><i class="fa fa-mobile"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
-          </li>
-        </ul>
-      </div>
+</button>
+<div class="fixedNav" *ngIf="fixedNavVisible">
+  <ul>
+    <li>
+      <a   href="#"><i class="fa fa-globe"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+    </li>
+    <li>
+      <a   href="#"><i class="fa fa-book"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+    </li>
+    <li>
+      <a   href="#"><i class="fa fa-mobile"  style="margin: 0px;font-size: 20px;background-color:blue ;color: white;padding: 12px;"></i></a>
+    </li>
+  </ul>
+</div>
+<div class="userProfileDetails" *ngIf="userProfileDetailsVisible">
+  <div style="display:block;">
+
+    <div style="overflow: auto;height: auto;">
+        <div class="userProfileContent">
+          <div class="userProfileCircle" style="font-size: 40px;display: flex;flex-direction: column;">
+              <div style="margin:auto ;flex:1">DS</div>
+          </div>
+          <span style="font-size: 20px; text-align: center;margin-top: 50px;">DeepeshSaini</span>
+          <a style="text-decoration: none;color: black;text-align: center;" href="#">Edit Profile</a>
+          <div style="align-self: center;width: 150px;height: 30px;padding: 5px;background-color: white;border-top-left-radius: 20px;border-bottom-right-radius: 20px;border: 1px solid black;margin-top: 20px;">My Options</div>
+          <ul style="list-style: none;">
+            <li>Delegation</li>
+            <li>Site Map</li>
+          </ul>
+          <div  style="
+          width: 100px;
+          height: 40px;
+          border: 1px solid black;
+          position: absolute;
+          background-color: #E2EBF5;
+          border-radius: 20px;
+          bottom:-20px;
+          left: 50%;
+          transform:translateX(-50%);
+          box-shadow: 0 0 5px 2px rgba(0,0,0,0.5);
+          display: flex;flex-direction: column;">
+          
+            <a href="#" style="margin:auto ;flex: 1;vertical-align: middle;text-decoration: none;">Sign Out</a>
+          </div>
+        </div>
+    </div>
+  </div> 
+</div>
 

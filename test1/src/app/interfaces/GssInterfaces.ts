@@ -1,5 +1,5 @@
 export interface component_buttons{
-    navigation_address:String;
+    navigation_address:string;
     parent:String;
     icon:String;
     label:String;
