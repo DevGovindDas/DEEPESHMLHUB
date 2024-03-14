@@ -1,0 +1,28 @@
+<div [ngClass]="{'centralContent':true}" [style.height.px]="centralComponentHeight" style="padding-left: 20px;padding-right: 20px;display: flex;flex-direction: column;overflow: auto;" >
+    
+    <div style="margin-left: 20px;display: flex;flex-direction: column;background-color: blueviolet;width: auto;height: 40px;width:200px;border-top-left-radius: 20px;border-top-right-radius: 20px;">
+        <p style="color: white;flex: 1;margin: auto;font-weight: 500;">My Modules</p>
+    </div>
+    <div style="padding: 22px;margin: 20px;margin-top: 0;background-color: white;width: auto;height: 110px;width:auto;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">
+        <div class="row">
+            <a class="componentButton d-flex" style="text-decoration: none; color: black;" [routerLink]="'/p4pPaidD'">
+                <div class="col-2" style="align-items:start;margin: auto;margin-left: 0;margin-right: 0;">
+                <img class="componentImg" src="../../assets/Capacity.jpg" >
+                </div>
+                <p style="margin: auto;flex:1;margin-left: 10px;word-wrap:break-word;">View P4P Paid Details</p>
+            </a>
+            <a class="componentButton d-flex" style="text-decoration: none; color: black;" href="#">
+                <div class="col-2" style="align-items:start;margin: auto;margin-left: 0;margin-right: 0;">
+                <img class="componentImg" src="../../assets/Capacity.jpg" >
+                </div>
+                <p style="margin: auto;flex:1;margin-left: 10px;word-wrap:break-word;">P4P Querry Resolution</p>
+            </a>
+            <a class="componentButton d-flex" style="text-decoration: none; color: black;" href="#">
+                <div class="col-2" style="align-items:start;margin: auto;margin-left: 0;margin-right: 0;">
+                <img class="componentImg" src="../../assets/Capacity.jpg" >
+                </div>
+                <p style="margin: auto;flex:1;margin-left: 10px;word-wrap:break-word;">Applicable P4P Scorecard</p>
+            </a>
+        </div>
+    </div>
+</div>

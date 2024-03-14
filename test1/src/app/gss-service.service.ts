@@ -57,115 +57,110 @@ export class GssServiceService {
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/Leave.png',
       label:'Leave & Attendance'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/employee_movement.jpg',
       label:'Employee Movement'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/seperation_module.png',
       label:'Sepration Module'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/training.jpeg',
       label:'Training'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/ijp.jpg',
       label:'IJP'
     },
     {
-      navigation_address:'#',
+      navigation_address:'/p4p',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/p4p.jpg',
       label:'P4P'
     },
+    
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
-      label:'Leave & Attendance'
-    },
-    {
-      navigation_address:'#',
-      parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/yourjourney.png',
       label:'Your Journey'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/resolve.webp',
       label:'I-RESOLVE'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/HrEmployee.png',
       label:'HR Employee Letters'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/employeecertificate.jpg',
       label:'Employee Certificate'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/employeebenefits.jpg',
       label:'Employee Benefits'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/personalinformation.jpg',
       label:'Personal Information'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/questionmark.jpg',
       label:'Question Mark'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/onepeopleplace.jpg',
       label:'One People Place'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/center stage.jpg',
       label:'Center Stage'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/ascenthr.jpg',
       label:'Ascent HR'
     },
     {
       navigation_address:'#',
       parent:'hr',
-      icon:'fa-thermometer',
+      icon:'../assets/lettergeneration.jpg',
       label:'Letter Generation'
     },
     {
       navigation_address:'#',
       parent:'it',
-      icon:'fa-thermometer',
+      icon:'../assets/Empower.jpg',
       label:'Team Enablement Tracking'
     },
     {

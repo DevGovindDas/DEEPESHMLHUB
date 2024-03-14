@@ -1,20 +1,21 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { component_buttons, department, journey } from './interfaces/GssInterfaces';
-import { GssServiceService } from './gss-service.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { GssServiceService } from '../gss-service.service';
+import { component_buttons } from '../interfaces/GssInterfaces';
+import { department } from '../interfaces/GssInterfaces';
+import { journey } from '../interfaces/GssInterfaces';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule,NgFor,RouterLink,RouterOutlet,LandingPageComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [CommonModule,NgFor,RouterLink,RouterOutlet],
+  templateUrl: './landing-page.component.html',
+  styles: ''
 })
-export class AppComponent {
-  title = 'test1';
+export class LandingPageComponent {
+    title = 'test1';
   fixedNavVisible:boolean=false;
   gss_service:GssServiceService=inject(GssServiceService);
   departments:department[]=this.gss_service.get_all_departments();
@@ -22,10 +23,6 @@ export class AppComponent {
   journeys:journey[]=this.gss_service.get_all_journeys();
   selected_components:component_buttons[]=[];
   label:any;
-  userProfileDetailsVisible: boolean=false;
-  userProfileDetailsClick(){
-    this.userProfileDetailsVisible=!this.userProfileDetailsVisible
-  }
   
   handle_department_click(event:Event):void{
     this.label=(<HTMLButtonElement>event.target).textContent;
@@ -85,5 +82,4 @@ export class AppComponent {
         this.centralComponentHeight=this.windowHeight-120;
       }
   }
-  
 }
