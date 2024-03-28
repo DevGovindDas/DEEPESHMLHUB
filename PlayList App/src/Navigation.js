@@ -5,9 +5,6 @@ export function Navigation() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <Link className="navbar-brand btn btn-success" to="/">
-          Navbar
-        </Link>
         <button
           className="navbar-toggler"
           type="button"
