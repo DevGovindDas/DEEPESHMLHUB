@@ -1,0 +1,35 @@
+<h2>Update Employee Form</h2> <br><br>
+<!-- Template driven forms -->
+    <form (ngSubmit)="updateEmployee()" >
+        <div>
+            <div class="form-group">
+                <label for="id">Id :</label>
+                <input type="text" id="id" name="id" class="form-control"  [(ngModel)]="course.courseId"><br>
+            </div>
+            <div class="form-group">
+                <label for="name">Name :</label>
+                <input type="text" id="name" name="course_name" class="form-control" [(ngModel)]="course.courseName"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="salary">Author_id :</label>
+                <input type="text" id="salary" name="author_name" class="form-control"[(ngModel)]="course.authorId"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="salary1">Duration :</label>
+                <input type="text" id="salary1" name="duration" class="form-control"[(ngModel)]="course.duration"><br><br>
+            </div>
+            <div class="form-group">
+                <label for="salary2">Avaliblity :</label>
+                <input type="text" id="salary2" name="duration" class="form-control"[(ngModel)]="course.avaliblity"><br><br>
+            </div>
+        </div>
+        <br>
+        <!-- <pre>
+        <button class="btn btn-success">Submit</button>    <button class="btn btn-info">Clear</button>
+    </pre> -->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        <!-- event binding (click) -->
+        <button class="btn btn-success" class="btn btn-warning">Update</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="reset" class="btn btn-info">Clear</button>
+        <br><br>
+    </form>

@@ -1,0 +1,40 @@
+<div class="container" >
+   <br>
+<h5>Employee Details</h5>
+<div>
+   <div  class="table-striped" style="width:500px">
+      <table class="table">
+         <thead>
+            <tr>
+               <th>Id</th>
+               <th>Course Name</th>
+               <th>Author Name</th>
+               <th>Author Id</th>
+               <th>Author Email</th>
+               <th>Course Duration</th>
+               <th>Avaliblity</th>
+               <th>Send Away</th>
+               <th>Change</th>
+            </tr>
+         </thead>
+         <tbody>
+           <!-- angular takes care of DOM manipulation -->
+           <!-- structural directive -->
+           <tr *ngFor="let course of courses">
+            <!-- {{}} string interpolation-->
+            <td>{{course.courseId}}</td>
+            <td>{{course.courseName}}</td>
+            <td>{{course.author.authorName}}</td>
+            <td>{{course.author.authorId}}</td>
+            <td>{{course.author.emailId}}</td>
+            <td>{{course.duration}}</td>
+            <td>{{course.avaliblity}}</td>
+            <td><button (click)="deleteCourse(course)" class="btn btn-danger" >Delete</button></td>
+            <td><button (click)="updateCourse(course.courseId)" class="btn btn-warning" >Update</button></td>
+           </tr>
+         </tbody>
+      </table>
+      <a routerLink="/add">Add Course</a>
+   </div>   
+</div>
+</div>
