@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+.main-title{
+    height: 100px;
+    font-size: 50px;
+    font-weight: 800;
+    background-color: yellow;
+    color: black;
+    text-align: center;
+    vertical-align: center;
+    margin: 0;
+}

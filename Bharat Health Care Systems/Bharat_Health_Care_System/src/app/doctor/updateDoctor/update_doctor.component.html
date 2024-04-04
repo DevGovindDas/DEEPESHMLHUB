@@ -1,0 +1,29 @@
+<div class="container" style="display: flex;flex-direction: column;">
+    <h5 style="margin: auto;">Please fill the form and press submit to add a doctor</h5>
+    <form [formGroup]="updateForm">
+        <table class="table table-primary" style="border: 1px solid #bbb;">
+            <tbody>
+                <tr>
+                    <td><label for="name"> Name</label></td>
+                    <td><input id="name" type="text" placeholder="Name..." formControlName="doctorName"/></td>
+                    <td><label for="qual"> Qualification</label></td>
+                    <td><input id="qual" type="text" placeholder="Qualification..." formControlName="doctorQual"/></td>
+                </tr>
+                <tr>
+                    <td><label for="special"> Specialization</label></td>
+                    <td><input id="special" type="text" placeholder="Specialization..." formControlName="doctorSpecialization"/></td>
+                    <td><label for="mobile"> Mobile</label></td>
+                    <td><input id="mobile" type="text" placeholder="Mobile..." formControlName="doctorMobile"/></td>
+                </tr>
+                <tr>
+                    <td><label for="email"> Email</label></td>
+                    <td><input id="email" type="text" placeholder="Email..." formControlName="doctorEmail"/></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td><input type="submit" (click)="updateDoctor()"/></td><td></td><td></td><td></td></tr>
+
+            </tbody>
+        </table>
+    </form>
+</div>
