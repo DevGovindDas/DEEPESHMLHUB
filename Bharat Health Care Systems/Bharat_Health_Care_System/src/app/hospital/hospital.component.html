@@ -1,1 +1,56 @@
-<p>hospital works!</p>
+<div style="display: flex; flex-direction: column; margin: 10px">
+  <div style="display: flex; flex-direction: row">
+    <form
+      [formGroup]="searchHospital"
+      (ngSubmit)="searchHospitals()"
+      style="margin: auto"
+    >
+      <label for="search">Enter the Search</label>
+      <input type="text" placeholder="Search..." formControlName="searchKey" />
+    </form>
+    <button
+      class="btn btn-primary"
+      style="margin: auto"
+      (click)="addHospital()"
+    >
+      Add Hospital
+    </button>
+  </div>
+  <hr />
+  <div class="container">
+    <table
+      class="table table-bordered table-primary"
+      style="border: 1px solid #bbb"
+    >
+      <thead>
+        <th>HospitalId</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Capacity</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hospital of hospitals; let i = index">
+          <td>{{ hospital.id }}</td>
+          <td>{{ hospital.name }}</td>
+          <td>{{ hospital.address }}</td>
+          <td>{{ hospital.admitCapacity }}</td>
+          <td>
+            <button (click)="updateHospital(hospital)" class="btn btn-primary">
+              Update
+            </button>
+          </td>
+          <td>
+            <button
+              (click)="deleteHospital(hospital.id)"
+              class="btn btn-danger"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -13,6 +13,8 @@ import { PatientComponent } from './patient/patient.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddDoctorComponent } from './doctor/addDoctor/add_doctor.component';
 import { UpdateDoctorComponent } from './doctor/updateDoctor/update_doctor.component';
+import { AddHospitalComponent } from './hospital/addHospital/add_hospital.component';
+import { UpdateHospitalComponent } from './hospital/updateHospital/update_hospital.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,19 @@ import { UpdateDoctorComponent } from './doctor/updateDoctor/update_doctor.compo
     AppointmentComponent,
     PatientComponent,
     AddDoctorComponent,
-    UpdateDoctorComponent
+    UpdateDoctorComponent,
+    AddHospitalComponent,
+    UpdateHospitalComponent,
   ],
   imports: [
-    BrowserModule,CommonModule,NgFor,ReactiveFormsModule,AppRoutingModule,FormsModule
+    BrowserModule,
+    CommonModule,
+    NgFor,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,35 @@
 <div class="container-fluid">
-  <h2 class="main-title">Bharat Health Care Services</h2>
-  <router-outlet></router-outlet> 
+  <div class="row main-title">
+    <h2 style="font-weight: 800; font-size: 50px">
+      Bharat Health Care Services
+    </h2>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+<button class="login-logout-button" (click)="showLoginDetails()">
+  {{ getAdminLogo() }}
+</button>
+<div class="userProfileDetails" *ngIf="profileVisible">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      align-items: center;
+    "
+  >
+    <h6>
+      Logged User:<span>{{
+        getAdminLogo() === "" ? "None" : getAdminLogo()
+      }}</span>
+    </h6>
+    <button
+      *ngIf="getAdminLogo() !== ''"
+      (click)="adminLogOut()"
+      class="btn btn-primary"
+      style="width: fit-content"
+    >
+      Logout
+    </button>
+  </div>
 </div>
