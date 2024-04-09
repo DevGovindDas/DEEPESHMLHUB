@@ -34,7 +34,7 @@ export class HospitalComponent implements OnInit {
     };
     this.router.navigate(['updateHospital'], navigationExtras);
   }
-  deleteHospital(id?: number) {
+  deleteHospital(id?: string) {
     console.log(id);
     this.hospitalService.deleteHospital(id);
     this.hospitals = this.hospitalService.getAllHospitals();

@@ -1,0 +1,65 @@
+<div class="container" style="display: flex; flex-direction: column">
+  <h5 style="margin: auto">
+    Please fill the form and press submit to add an Appointment
+  </h5>
+  <form [formGroup]="addForm">
+    <table class="table table-primary" style="border: 1px solid #bbb">
+      <tbody>
+        <tr>
+          <td><label for="patientId"> Patient Id</label></td>
+          <td>
+            <select
+              id="patientId"
+              formControlName="patientId"
+              (change)="filterRemaining()"
+            >
+              <option
+                *ngFor="let patient of patients"
+                [value]="patient.patientId"
+              >
+                {{ patient.name }}--Id({{ patient.patientId }})
+              </option></select
+            ><span class="error-message">{{ errorPatientId }}</span>
+          </td>
+          <td><label for="doctorId"> Doctor Id</label></td>
+          <td>
+            <select id="doctorId" formControlName="doctorId">
+              <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+                {{ doctor.name }}--Id({{ doctor.doctorId }})
+              </option></select
+            ><span class="error-message">{{ errorDoctorId }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="date"> Date</label></td>
+          <td>
+            <input
+              id="date"
+              type="date"
+              formControlName="date"
+              [min]="minDate"
+              [max]="maxDate"
+            /><span class="error-message">{{ errorDate }}</span>
+          </td>
+
+          <td><label for="slot"> Slot</label></td>
+          <td>
+            <select id="slot" formControlName="slotNumber">
+              <option *ngFor="let slot of slotMap" [value]="slot.slotNumber">
+                {{ slot.time }}
+              </option></select
+            ><span class="error-message">{{ errorSlot }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" (click)="addAppointment()" /></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

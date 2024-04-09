@@ -1,8 +1,8 @@
-<div class="container" style="display: flex; flex-direction: column">
+<!-- <div class="container" style="display: flex; flex-direction: column">
   <h5 style="margin: auto">
-    Please fill the form and press submit to add a doctor
+    Please fill the form and press submit to update doctor
   </h5>
-  <form [formGroup]="addForm">
+  <form [formGroup]="updateForm">
     <table class="table table-primary" style="border: 1px solid #bbb">
       <tbody>
         <tr>
@@ -39,10 +39,7 @@
           <td><label for="hospitalIdInput"> Hospital Name</label></td>
           <td>
             <select id="hospitalName" formControlName="hospitalId">
-              <option
-                *ngFor="let hospital of hospitals"
-                [value]="hospital.hospitalId"
-              >
+              <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalId">
                 {{ hospital.name }}--Id({{ hospital.hospitalId }})
               </option></select
             ><span class="error-message">{{ errorHospitalId }}</span>
@@ -68,7 +65,7 @@
           </td>
         </tr>
         <tr>
-          <td><input type="submit" (click)="addDoctor()" /></td>
+          <td><input type="submit" (click)="updateDoctor()" /></td>
           <td></td>
           <td></td>
           <td></td>
@@ -78,4 +75,4 @@
       </tbody>
     </table>
   </form>
-</div>
+</div> -->

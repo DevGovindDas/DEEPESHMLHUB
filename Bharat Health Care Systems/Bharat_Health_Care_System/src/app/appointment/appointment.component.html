@@ -1,1 +1,58 @@
-<p>appointment works!</p>
+<div class="container">
+  <div style="display: flex; flex-direction: row">
+    <form
+      [formGroup]="searchAppointment"
+      (ngSubmit)="searchAppointments()"
+      style="margin: auto"
+    >
+      <label for="search">Enter the Search</label>
+      <input type="text" placeholder="Search..." formControlName="searchKey" />
+    </form>
+    <button
+      class="btn btn-primary"
+      style="margin: auto"
+      (click)="addAppointment()"
+    >
+      Add Appointment
+    </button>
+  </div>
+  <table
+    class="table table-bordered table-primary"
+    style="border: 1px solid #bbb"
+  >
+    <thead>
+      <th scope="col">Appointment Id</th>
+      <th scope="col">Patient Id</th>
+      <th scope="col">Doctor Id</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of filteredAppointments; let i = index">
+        <td>{{ appointment.appointmentId }}</td>
+        <td>{{ appointment.patientId }}</td>
+        <td>{{ appointment.doctorId }}</td>
+        <td>{{ appointment.date?.toDateString() }}</td>
+        <td>{{ getSlotTime(appointment.slotNumber) }}</td>
+        <td>
+          <button
+            (click)="updateAppointment(appointment)"
+            class="btn btn-primary"
+          >
+            Update
+          </button>
+        </td>
+        <td>
+          <button
+            (click)="deleteAppointment(appointment.appointmentId)"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

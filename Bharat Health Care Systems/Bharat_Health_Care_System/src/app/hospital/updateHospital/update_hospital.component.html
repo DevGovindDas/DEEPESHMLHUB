@@ -1,6 +1,6 @@
 <div class="container" style="display: flex; flex-direction: column">
   <h5 style="margin: auto">
-    Please fill the form and press submit to add a doctor
+    Please fill the form and press submit to update Hospital
   </h5>
   <form [formGroup]="updateForm">
     <table class="table table-primary" style="border: 1px solid #bbb">
@@ -13,7 +13,7 @@
               type="text"
               placeholder="Name..."
               formControlName="hospitalName"
-            />
+            /><span class="error-message">{{ errorName }}</span>
           </td>
           <td><label for="address`"> Address</label></td>
           <td>
@@ -22,7 +22,7 @@
               type="text"
               placeholder="Address..."
               formControlName="hospitalAddress"
-            />
+            /><span class="error-message">{{ errorAddress }}</span>
           </td>
         </tr>
         <tr>
@@ -33,7 +33,7 @@
               type="text"
               placeholder="Capacity..."
               formControlName="hospitalCapacity"
-            /><span>{{ errorCapacity }}</span>
+            /><span class="error-message">{{ errorCapacity }}</span>
           </td>
           <td></td>
           <td></td>

@@ -1,39 +1,57 @@
-<div style="display: flex;flex-direction: column;margin: 10px;">
-    <div style="display: flex;flex-direction: row;" >
-        <form [formGroup]="searchDoctor" (ngSubmit)="searchDoctors()" style="margin: auto;" >
-            <label for="search">Enter the Search</label>
-            <input type="text" placeholder="Search..." formControlName="searchKey" />
-        </form>
-        <button class="btn btn-primary" style="margin: auto;" (click)="addDoctor()">Add Doctor</button>
-    </div>
-    <hr />
-    <div class="container">
-        <table class="table table-bordered table-primary" style="border: 1px solid #bbb;">
-            <thead >
-                <th>DoctorId</th>
-                <th scope="col">Name</th>
-                <th scope="col">Qualification</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Speciality</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">Email</th>
-                <th scope="col">Update</th>
-                <th scope="col">Delete</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let doctor of doctors;let i =index">
-                    <td>{{doctor.id}}</td>
-                    <td>{{doctor.name}}</td>
-                    <td>{{doctor.qualification}}</td>
-                    <td>{{doctor.rating}}</td>
-                    <td>{{doctor.speciality}}</td>
-                    <td>{{doctor.mobile}}</td>
-                    <td>{{doctor.email}}</td>
-                    <td><button (click)="updateDoctor(doctor)" class="btn btn-primary">Update</button></td>
-                    <td><button (click)="deleteDoctor(doctor.id)" class="btn btn-danger">Delete</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+<div style="display: flex; flex-direction: column; margin: 10px">
+  <div style="display: flex; flex-direction: row">
+    <form
+      [formGroup]="searchDoctor"
+      (ngSubmit)="searchDoctors()"
+      style="margin: auto"
+    >
+      <label for="search">Enter the Search</label>
+      <input type="text" placeholder="Search..." formControlName="searchKey" />
+    </form>
+    <button class="btn btn-primary" style="margin: auto" (click)="addDoctor()">
+      Add Doctor
+    </button>
+  </div>
+  <hr />
+  <div class="container">
+    <table
+      class="table table-bordered table-primary"
+      style="border: 1px solid #bbb"
+    >
+      <thead>
+        <th>DoctorId</th>
+        <th scope="col">Name</th>
+        <th scope="col">Qualification</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Speciality</th>
+        <th scope="col">Hospital Name</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors; let i = index">
+          <td>{{ doctor.doctorId }}</td>
+          <td>{{ doctor.name }}</td>
+          <td>{{ doctor.qualification }}</td>
+          <td>{{ doctor.rating }}</td>
+          <td>{{ doctor.speciality }}</td>
+          <td>{{ getHospitalName(doctor.hospitalId) }}</td>
+          <td>{{ doctor.mobile }}</td>
+          <td>{{ doctor.email }}</td>
+          <td>
+            <button (click)="updateDoctor(doctor)" class="btn btn-primary">
+              Update
+            </button>
+          </td>
+          <td>
+            <button (click)="deleteDoctor(doctor.doctorId)" class="btn btn-danger">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

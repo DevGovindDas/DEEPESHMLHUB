@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Doctor } from 'src/model/BHCS.model';
-import { DoctorService } from '../service/BHCS.service';
+import { Doctor, Hospital } from 'src/model/BHCS.model';
+import { DoctorService, HospitalService } from '../service/BHCS.service';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,9 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class DoctorComponent implements OnInit {
   doctors: Doctor[] = [];
+  hospitals: Hospital[] = [];
   doctorService: DoctorService = inject(DoctorService);
+  hospitalService: HospitalService = inject(HospitalService);
   searchDoctor: FormGroup;
 
   constructor(formBuilder: FormBuilder, private router: Router) {
@@ -19,6 +21,7 @@ export class DoctorComponent implements OnInit {
       searchKey: [''],
     });
     this.doctors = this.doctorService.getSearchedDoctors();
+    this.hospitals = this.hospitalService.getAllHospitals();
   }
 
   ngOnInit(): void {}
@@ -32,12 +35,16 @@ export class DoctorComponent implements OnInit {
     const navigationExtras: NavigationExtras = { state: { myObject: doctor } };
     this.router.navigate(['updateDoctor'], navigationExtras);
   }
-  deleteDoctor(id?: number) {
+  deleteDoctor(id?: string) {
     console.log(id);
     this.doctorService.deleteDoctor(id);
     this.doctors = this.doctorService.getSearchedDoctors();
   }
   addDoctor() {
     this.router.navigate(['addDoctor']);
+  }
+  getHospitalName(id?: string): string | undefined {
+    console.log(id, 'test');
+    return this.hospitals.filter((h) => h.hospitalId === id)[0].name;
   }
 }

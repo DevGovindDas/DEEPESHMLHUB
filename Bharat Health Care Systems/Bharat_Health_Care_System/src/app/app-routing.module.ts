@@ -11,6 +11,7 @@ import { UpdateDoctorComponent } from './doctor/updateDoctor/update_doctor.compo
 import { AdminAuthguardService } from './service/authguard.service';
 import { AddHospitalComponent } from './hospital/addHospital/add_hospital.component';
 import { UpdateHospitalComponent } from './hospital/updateHospital/update_hospital.component';
+import { AddAppointmentComponent } from './appointment/addApointment/add_appointment.component';
 
 const configuredRoutes: Routes = [
   { path: '', component: LoginPageComponent },
@@ -27,6 +28,11 @@ const configuredRoutes: Routes = [
   {
     path: 'appointment',
     component: AppointmentComponent,
+    canActivate: [AdminAuthguardService],
+  },
+  {
+    path: 'addAppointment',
+    component: AddAppointmentComponent,
     canActivate: [AdminAuthguardService],
   },
   {

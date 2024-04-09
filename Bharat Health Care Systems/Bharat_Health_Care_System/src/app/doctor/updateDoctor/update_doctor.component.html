@@ -1,6 +1,6 @@
 <div class="container" style="display: flex; flex-direction: column">
   <h5 style="margin: auto">
-    Please fill the form and press submit to add a doctor
+    Please fill the form and press submit to update doctor
   </h5>
   <form [formGroup]="updateForm">
     <table class="table table-primary" style="border: 1px solid #bbb">
@@ -13,7 +13,7 @@
               type="text"
               placeholder="Name..."
               formControlName="doctorName"
-            />
+            /><span class="error-message">{{ errorName }}</span>
           </td>
           <td><label for="qual"> Qualification</label></td>
           <td>
@@ -22,10 +22,9 @@
               type="text"
               placeholder="Qualification..."
               formControlName="doctorQual"
-            />
+            /><span class="error-message">{{ errorQual }}</span>
           </td>
-        </tr>
-        <tr>
+
           <td><label for="special"> Specialization</label></td>
           <td>
             <input
@@ -33,7 +32,17 @@
               type="text"
               placeholder="Specialization..."
               formControlName="doctorSpecialization"
-            />
+            /><span class="error-message">{{ errorSpecialization }}</span>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="hospitalIdInput"> Hospital Name</label></td>
+          <td>
+            <select id="hospitalName" formControlName="hospitalId">
+              <option *ngFor="let hospital of hospitals" [value]="hospital.hospitalId">
+                {{ hospital.name }}--Id({{ hospital.hospitalId }})
+              </option></select
+            ><span class="error-message">{{ errorHospitalId }}</span>
           </td>
           <td><label for="mobile"> Mobile</label></td>
           <td>
@@ -42,10 +51,9 @@
               type="text"
               placeholder="Mobile..."
               formControlName="doctorMobile"
-            /><span>{{ errorMobile }}</span>
+            /><span class="error-message">{{ errorMobile }}</span>
           </td>
-        </tr>
-        <tr>
+
           <td><label for="email"> Email</label></td>
           <td>
             <input
@@ -53,13 +61,13 @@
               type="text"
               placeholder="Email..."
               formControlName="doctorEmail"
-            /><span>{{ errorEmail }}</span>
+            /><span class="error-message">{{ errorEmail }}</span>
           </td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
           <td><input type="submit" (click)="updateDoctor()" /></td>
+          <td></td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>

@@ -14,7 +14,9 @@ export class UpdateHospitalComponent implements OnInit {
   updateForm!: FormGroup;
   hospital!: Hospital;
   hospitalService: HospitalService = inject(HospitalService);
-  errorCapacity = '';
+  errorCapacity = ' ';
+  errorName = ' ';
+  errorAddress = ' ';
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -23,7 +25,7 @@ export class UpdateHospitalComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.hospital = history.state.myObject;
       this.updateForm = this.formBuilder.group({
-        hospitalId: [this.hospital.id],
+        hospitalId: [this.hospital.hospitalId],
         hospitalName: [this.hospital.name, [Validators.required]],
         hospitalAddress: [this.hospital.address, [Validators.required]],
         hospitalCapacity: [
@@ -51,9 +53,33 @@ export class UpdateHospitalComponent implements OnInit {
     } else {
       this.errorCapacity = '';
     }
-    if (this.errorCapacity == '') {
+    if (this.updateForm.controls['hospitalName'].invalid) {
+      if (
+        this.updateForm.controls['hospitalName'].dirty ||
+        this.updateForm.controls['hospitalName'].touched
+      ) {
+        this.errorName = 'Name cannot be empty';
+      }
+    } else {
+      this.errorName = '';
+    }
+    if (this.updateForm.controls['hospitalAddress'].invalid) {
+      if (
+        this.updateForm.controls['hospitalAddress'].dirty ||
+        this.updateForm.controls['hospitalAddress'].touched
+      ) {
+        this.errorAddress = 'Address cannot be empty';
+      }
+    } else {
+      this.errorAddress = '';
+    }
+    if (
+      this.errorCapacity === '' &&
+      this.errorAddress === '' &&
+      this.errorName === ''
+    ) {
       const newHospital = {
-        id: this.updateForm.get('hospitalId')?.value,
+        hospitalId: this.updateForm.get('hospitalId')?.value,
         name: this.updateForm.get('hospitalName')?.value,
         address: this.updateForm.get('hospitalAddress')?.value,
         admitCapacity: this.updateForm.get('hospitalCapacity')?.value,
@@ -61,6 +87,14 @@ export class UpdateHospitalComponent implements OnInit {
       console.log(newHospital, 'Before Service Call');
       this.hospitalService.updateHospital(newHospital);
       this.router.navigate(['hospital']);
+    } else if (
+      this.errorCapacity === ' ' &&
+      this.errorAddress === ' ' &&
+      this.errorName === ' '
+    ) {
+      this.errorName = 'Please fill this field';
+      this.errorAddress = 'Please fill this field';
+      this.errorCapacity = 'Please fill this field';
     }
   }
 }
