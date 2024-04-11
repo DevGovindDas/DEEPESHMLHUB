@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '../BHCSInterface';
 import { Router } from '@angular/router';
+import { User } from 'src/model/BHCS.model';
 
 @Injectable({
   providedIn: 'root',

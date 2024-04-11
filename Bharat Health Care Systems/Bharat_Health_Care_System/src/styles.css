@@ -41,3 +41,18 @@
   color: red;
   font-style: italic;
 }
+
+.home-button{
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  width: 60px;
+  height: 60px;
+  color: white;
+  font-size: 20px;
+  background-color: green;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -6,6 +6,7 @@
   </div>
   <router-outlet></router-outlet>
 </div>
+<a class="home-button" [routerLink]="'home'"><i >Home</i></a>
 <button class="login-logout-button" (click)="showLoginDetails()">
   {{ getAdminLogo() }}
 </button>

@@ -13,7 +13,7 @@ import {
   HospitalService,
   PatientService,
 } from 'src/app/service/BHCS.service';
-import { Doctor, Hospital, Patient, Slot } from 'src/model/BHCS.model';
+import { Appointment, Doctor, Hospital, Patient, Slot } from 'src/model/BHCS.model';
 
 @Component({
   selector: 'add-appointment',
@@ -28,6 +28,7 @@ export class AddAppointmentComponent {
   slotMap: Slot[] = [];
   doctors: Doctor[] = [];
   patients: Patient[] = [];
+  appointments:Appointment[]=[];
   errorDoctorId: string = ' ';
   errorDate: string = ' ';
   errorPatientId: string = ' ';
@@ -36,9 +37,10 @@ export class AddAppointmentComponent {
   maxDate: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.doctors = this.doctorService.getSearchedDoctors();
+    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
     this.patients = this.patientService.getAllPatients();
     this.slotMap = this.appointmentService.getSlotTimeMap();
+    this.appointments=this.appointmentService.getAllAppointments();
     this.addForm = formBuilder.group({
       doctorId: ['', [Validators.required]],
       patientId: ['', [Validators.required]],
@@ -131,5 +133,6 @@ export class AddAppointmentComponent {
   }
   filterRemaining() {
     const patientId = this.addForm.get('patientId')?.value;
+    
   }
 }

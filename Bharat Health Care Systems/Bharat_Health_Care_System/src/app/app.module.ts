@@ -16,6 +16,7 @@ import { UpdateDoctorComponent } from './doctor/updateDoctor/update_doctor.compo
 import { AddHospitalComponent } from './hospital/addHospital/add_hospital.component';
 import { UpdateHospitalComponent } from './hospital/updateHospital/update_hospital.component';
 import { AddAppointmentComponent } from './appointment/addApointment/add_appointment.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AddAppointmentComponent } from './appointment/addApointment/add_appoint
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

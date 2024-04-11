@@ -1,3 +1,9 @@
+export class User {
+  name?: string;
+  userName?: string;
+  password?: string;
+}
+
 export class Doctor {
   doctorId?: string;
   name?: string;

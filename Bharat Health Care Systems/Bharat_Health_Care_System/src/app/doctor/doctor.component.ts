@@ -20,15 +20,36 @@ export class DoctorComponent implements OnInit {
     this.searchDoctor = formBuilder.group({
       searchKey: [''],
     });
-    this.doctors = this.doctorService.getSearchedDoctors();
+    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
     this.hospitals = this.hospitalService.getAllHospitals();
   }
 
   ngOnInit(): void {}
 
   searchDoctors() {
-    this.doctors = this.doctorService.searchDoctor(
-      this.searchDoctor.get('searchKey')?.value
+    var key=this.searchDoctor.get('searchKey')?.value;
+    this.doctors= this.doctors.filter(
+      (doc) =>
+        doc.doctorId
+          ?.toLocaleString()
+          .toLocaleLowerCase()
+          .includes(key.toLocaleLowerCase()) ||
+        doc.name
+          ?.toLocaleString()
+          .toLocaleLowerCase()
+          .includes(key.toLocaleLowerCase()) ||
+        doc.mobile
+          ?.toLocaleString()
+          .toLocaleLowerCase()
+          .includes(key.toLocaleLowerCase()) ||
+        doc.speciality
+          ?.toLocaleString()
+          .toLocaleLowerCase()
+          .includes(key.toLocaleLowerCase()) ||
+        doc.qualification
+          ?.toLocaleString()
+          .toLocaleLowerCase()
+          .includes(key.toLocaleLowerCase())
     );
   }
   updateDoctor(doctor?: Doctor) {
@@ -38,7 +59,7 @@ export class DoctorComponent implements OnInit {
   deleteDoctor(id?: string) {
     console.log(id);
     this.doctorService.deleteDoctor(id);
-    this.doctors = this.doctorService.getSearchedDoctors();
+    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
   }
   addDoctor() {
     this.router.navigate(['addDoctor']);

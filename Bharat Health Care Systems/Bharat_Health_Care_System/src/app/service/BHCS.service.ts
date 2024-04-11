@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   Appointment,
   Doctor,
@@ -6,89 +7,30 @@ import {
   Patient,
   Slot,
 } from 'src/model/BHCS.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DoctorService {
-  constructor() {}
-  doctors: Doctor[] = [
-    {
-      doctorId: 'D00001',
-      name: 'doctor1',
-      qualification: 'qual1',
-      rating: 3,
-      speciality: 'Heart',
-      mobile: 8955405625,
-      email: 'abc@xyz.com',
-      hospitalId: 'H00001',
-    },
-    {
-      doctorId: 'D00002',
-      name: 'doctor2',
-      qualification: 'qual2',
-      rating: 4,
-      speciality: 'Kidney',
-      mobile: 8955405624,
-      email: 'abc1@xyz.com',
-      hospitalId: 'H00002',
-    },
-  ];
-
-  getSearchedDoctors(): Doctor[] {
-    return this.doctors;
+  constructor(private httpClient:HttpClient) {}
+  doctors: Doctor[] = [];
+    
+  getSearchedDoctors(): Observable<Doctor[]>{
+    return this.httpClient.get<Doctor[]>("http://localhost:8070/doctor")
   }
 
-  addDoctor(doctor: Doctor): Doctor {
-    console.log(doctor, 'Inside addDoctor');
-    doctor.doctorId = String(Date.now());
-    doctor.rating = 0;
-    this.doctors = [...this.doctors, doctor];
-    console.log(this.doctors, 'All Doctors Inside addDoctor');
-    return doctor;
+  addDoctor(doctor: Doctor):Observable<Doctor> {
+    return this.httpClient.post<Doctor>("http://localhost:8070/doctor",doctor)
   }
-  updateDoctor(doctor: Doctor): string {
-    const result = this.doctors.filter(
-      (doctor1) => doctor.doctorId === doctor1.doctorId
-    )[0];
-    if (result === null) return 'doctor with this id does not exist';
-    this.doctors = this.doctors.map((doctor1) =>
-      doctor1.doctorId === doctor.doctorId ? doctor : doctor1
-    );
-    return 'updated succesfully';
+  updateDoctor(doctor: Doctor):Observable<Doctor> {
+    return this.httpClient.post<Doctor>("http://localhost:8070/doctor",doctor)
   }
 
-  deleteDoctor(id?: string): string {
-    const result = this.doctors.filter((doctor1) => id === doctor1.doctorId)[0];
-    if (result === null) return 'doctor with this id does not exist';
-    this.doctors = this.doctors.filter((doctor1) => doctor1.doctorId !== id);
-    return 'deleted succesfully';
+  deleteDoctor(id?: string){
+    this.httpClient.delete<Doctor>("http://localhost:8070/doctor"+"/"+id,)
   }
-  searchDoctor(key: string): Doctor[] {
-    return this.doctors.filter(
-      (doc) =>
-        doc.doctorId
-          ?.toLocaleString()
-          .toLocaleLowerCase()
-          .includes(key.toLocaleLowerCase()) ||
-        doc.name
-          ?.toLocaleString()
-          .toLocaleLowerCase()
-          .includes(key.toLocaleLowerCase()) ||
-        doc.mobile
-          ?.toLocaleString()
-          .toLocaleLowerCase()
-          .includes(key.toLocaleLowerCase()) ||
-        doc.speciality
-          ?.toLocaleString()
-          .toLocaleLowerCase()
-          .includes(key.toLocaleLowerCase()) ||
-        doc.qualification
-          ?.toLocaleString()
-          .toLocaleLowerCase()
-          .includes(key.toLocaleLowerCase())
-    );
-  }
+  
 }
 
 @Injectable({
