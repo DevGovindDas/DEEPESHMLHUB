@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HospitalService } from 'src/app/service/BHCS.service';
+import { HospitalService } from 'src/app/service/services';
 
 export function numberValidator(
   control: AbstractControl
@@ -84,7 +84,7 @@ export class AddHospitalComponent {
         address: this.addForm.get('hospitalAddress')?.value,
         admitCapacity: this.addForm.get('hospitalCapacity')?.value,
       };
-      this.hospitalService.addHospital(newHospital);
+      this.hospitalService.addHospital(newHospital).subscribe(a=>console.log(a));
       this.router.navigate(['hospital']);
     } else if (
       this.errorCapacity === ' ' &&

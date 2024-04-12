@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Doctor, Hospital } from 'src/model/BHCS.model';
-import { DoctorService, HospitalService } from '../service/BHCS.service';
+import { DoctorService, HospitalService } from '../service/services';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.css'],
 })
-export class DoctorComponent implements OnInit {
+export class DoctorComponent implements OnInit,OnChanges {
   doctors: Doctor[] = [];
   hospitals: Hospital[] = [];
   doctorService: DoctorService = inject(DoctorService);
@@ -20,11 +20,17 @@ export class DoctorComponent implements OnInit {
     this.searchDoctor = formBuilder.group({
       searchKey: [''],
     });
-    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
-    this.hospitals = this.hospitalService.getAllHospitals();
+    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+    this.hospitalService.getAllHospitals().subscribe(data=>this.hospitals=data);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+  }
 
   searchDoctors() {
     var key=this.searchDoctor.get('searchKey')?.value;
@@ -58,8 +64,13 @@ export class DoctorComponent implements OnInit {
   }
   deleteDoctor(id?: string) {
     console.log(id);
-    this.doctorService.deleteDoctor(id);
-    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
+    var res: { doctorId: string };
+    this.doctorService.deleteDoctor(id).subscribe(data=>{
+      res=data;
+      if(res){
+        this.doctors=this.doctors.filter(d=>d.doctorId!==res.doctorId)
+      }
+    });
   }
   addDoctor() {
     this.router.navigate(['addDoctor']);
@@ -69,3 +80,4 @@ export class DoctorComponent implements OnInit {
     return this.hospitals.filter((h) => h.hospitalId === id)[0].name;
   }
 }
+

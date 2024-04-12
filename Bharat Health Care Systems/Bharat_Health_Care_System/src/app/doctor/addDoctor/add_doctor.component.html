@@ -2,7 +2,7 @@
   <h5 style="margin: auto">
     Please fill the form and press submit to add a doctor
   </h5>
-  <form [formGroup]="addForm">
+  <form [formGroup]="addForm" (ngSubmit)="addDoctor()">
     <table class="table table-primary" style="border: 1px solid #bbb">
       <tbody>
         <tr>
@@ -68,7 +68,7 @@
           </td>
         </tr>
         <tr>
-          <td><input type="submit" (click)="addDoctor()" /></td>
+          <td><button type="submit">Submit</button></td>
           <td></td>
           <td></td>
           <td></td>

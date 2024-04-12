@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/hospital")
+@CrossOrigin(origins ="http://localhost:4200")
 public class HospitalController {
 
     @Autowired
@@ -31,17 +32,20 @@ public class HospitalController {
 
     @PutMapping
     public Hospital updateHospital(@RequestBody Hospital hospital){
+        System.out.println("I am in updateHospital()****************************");
         Hospital hospital1=hospitalRepository.findByHospitalId(hospital.getHospitalId());
         hospital1.setName(hospital.getName());
         hospital1.setAddress(hospital.getAddress());
         hospital1.setAdmitCapacity(hospital.getAdmitCapacity());
+        hospitalRepository.save(hospital1);
         return hospital1;
     }
 
     @DeleteMapping("/{id}")
-    public void deleteHospital(@PathVariable String id){
+    public Hospital deleteHospital(@PathVariable String id){
         Hospital hospital=hospitalRepository.findByHospitalId(id);
         hospitalRepository.deleteById(hospital.getId());
+        return hospital;
     }
 
 }

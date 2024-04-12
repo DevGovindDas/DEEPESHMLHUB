@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Appointment, Slot } from 'src/model/BHCS.model';
-import { AppointmentService } from '../service/BHCS.service';
+import { AppointmentService } from '../service/services';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -19,8 +19,10 @@ export class AppointmentComponent implements OnInit {
     this.searchAppointment = this.formBuilder.group({
       searchKey: [''],
     });
-    this.appointments = this.appointmentService.getAllAppointments();
-    this.filteredAppointments = this.appointmentService.getAllAppointments();
+    this.appointmentService.getAllAppointments().subscribe(data=>{
+      this.appointments=data;
+      this.filteredAppointments=data;
+    });
     this.slotTimeMap = this.appointmentService.getSlotTimeMap();
   }
 
@@ -32,7 +34,11 @@ export class AppointmentComponent implements OnInit {
     this.router.navigate(['updateAppointment'], navigationExtras);
   }
   deleteAppointment(id?: string) {
-    this.appointmentService.deleteAppointment(id);
+    this.appointmentService.deleteAppointment(id).subscribe(data=>{
+      if(data){
+        this.appointments=this.appointments.filter(a=>a.appointmentId!==id);
+      }
+    });
   }
   getSlotTime(sno?: number) {
     return this.slotTimeMap.filter((s) => s.slotNumber === sno)[0].time;

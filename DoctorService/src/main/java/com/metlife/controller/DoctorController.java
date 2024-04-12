@@ -5,34 +5,38 @@ import com.metlife.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/doctor")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DoctorController {
 
     @Autowired
     public DoctorRepository doctorRepository;
 
-    @GetMapping
+
+    @GetMapping("doctor")
     public List<Doctor> getAllDoctors(){
+        System.out.println("I reached getAllDoctors()********************");
         return doctorRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("doctor/{id}")
     public Doctor getDoctor(@PathVariable String id){
+        System.out.println("I reached GetById********************");
         return doctorRepository.findByDoctorId(id);
     }
 
-    @PostMapping
+    @PostMapping("doctor")
     public Doctor addDoctor(@RequestBody Doctor doctor){
+        System.out.println("I reached addDoctor()********************");
         return doctorRepository.save(doctor);
     }
 
-    @PutMapping
+    @PutMapping("doctor")
     public Doctor updateDoctor(@RequestBody Doctor doctor){
+        System.out.println("I reached UPDATE********************");
         Doctor doctor1=doctorRepository.findByDoctorId(doctor.getDoctorId());
         doctor1.setName(doctor.getName());
         doctor1.setEmail(doctor.getEmail());
@@ -44,10 +48,12 @@ public class DoctorController {
         return doctor1;
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteDoctor(@PathVariable String id){
+    @DeleteMapping("doctor/{id}")
+    public Doctor deleteDoctor(@PathVariable String id){
+        System.out.println("I reached DELETE********************");
        Doctor doctor=doctorRepository.findByDoctorId(id);
        doctorRepository.deleteById(doctor.getId());
+       return doctor;
     }
 
 }

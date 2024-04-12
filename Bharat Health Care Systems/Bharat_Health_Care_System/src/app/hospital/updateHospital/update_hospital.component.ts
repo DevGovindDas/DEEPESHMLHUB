@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HospitalService } from 'src/app/service/BHCS.service';
+import { HospitalService } from 'src/app/service/services';
 import { Hospital } from 'src/model/BHCS.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { numberValidator } from '../addHospital/add_hospital.component';
@@ -85,7 +85,7 @@ export class UpdateHospitalComponent implements OnInit {
         admitCapacity: this.updateForm.get('hospitalCapacity')?.value,
       };
       console.log(newHospital, 'Before Service Call');
-      this.hospitalService.updateHospital(newHospital);
+      this.hospitalService.updateHospital(newHospital).subscribe(d=>console.log(d));
       this.router.navigate(['hospital']);
     } else if (
       this.errorCapacity === ' ' &&

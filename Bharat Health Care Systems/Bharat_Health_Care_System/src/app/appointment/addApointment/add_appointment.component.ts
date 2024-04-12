@@ -12,7 +12,7 @@ import {
   DoctorService,
   HospitalService,
   PatientService,
-} from 'src/app/service/BHCS.service';
+} from 'src/app/service/services';
 import { Appointment, Doctor, Hospital, Patient, Slot } from 'src/model/BHCS.model';
 
 @Component({
@@ -29,6 +29,7 @@ export class AddAppointmentComponent {
   doctors: Doctor[] = [];
   patients: Patient[] = [];
   appointments:Appointment[]=[];
+  filteredAppointments:Appointment[]=[];
   errorDoctorId: string = ' ';
   errorDate: string = ' ';
   errorPatientId: string = ' ';
@@ -37,10 +38,10 @@ export class AddAppointmentComponent {
   maxDate: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.doctorService.getSearchedDoctors().subscribe(data=>this.doctors=data);
-    this.patients = this.patientService.getAllPatients();
+    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+    this.patientService.getAllPatients().subscribe(data=>this.patients=data);
     this.slotMap = this.appointmentService.getSlotTimeMap();
-    this.appointments=this.appointmentService.getAllAppointments();
+    this.appointmentService.getAllAppointments().subscribe(data=>this.appointments=data);
     this.addForm = formBuilder.group({
       doctorId: ['', [Validators.required]],
       patientId: ['', [Validators.required]],
@@ -117,7 +118,11 @@ export class AddAppointmentComponent {
         date: new Date(this.addForm.get('date')?.value),
       };
       console.log(newAppointment);
-      this.appointmentService.addAppointment(newAppointment);
+      this.appointmentService.addAppointment(newAppointment).subscribe(data=>{
+        if(data){
+        this.appointments=[...this.appointments,newAppointment]
+        }
+      });
       this.router.navigate(['appointment']);
     } else if (
       this.errorDate === ' ' &&
@@ -131,8 +136,80 @@ export class AddAppointmentComponent {
       this.errorSlot = 'Please Fill this field';
     }
   }
-  filterRemaining() {
+  filterRemaining4() {
     const patientId = this.addForm.get('patientId')?.value;
+    const doctorId=this.addForm.get('doctorId')?.value;
+    const date=this.addForm.get('date')?.value;
+    if(patientId===''){
+      this.doctors=[];
+      this.errorPatientId='Please select patientId First';
+      this.addForm.get('doctorId')?.setValue('');
+      this.addForm.get('date')?.setValue('');
+      this.addForm.get('slotNumber')?.setValue('');
+    }else if(doctorId===''){
+      this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+      this.errorPatientId='';
+      this.errorDoctorId='Please select doctorId First';
+      this.addForm.get('date')?.setValue('');
+      this.addForm.get('slotNumber')?.setValue('');
+    }else if(date===''){
+      this.errorPatientId='';
+      this.errorDoctorId='';
+      this.errorDate='Please select date First';
+      this.addForm.get('date')?.setValue('');
+      this.addForm.get('slotNumber')?.setValue('');
+    }else{
+      this.errorDate='';
+      this.errorDoctorId='';
+      this.errorPatientId='';
+    }
+  }
+  filterRemaining3() {
+    const patientId = this.addForm.get('patientId')?.value;
+    const doctorId=this.addForm.get('doctorId')?.value;
+    const date=this.addForm.get('date')?.value;
+    if(patientId===''){
+      this.doctors=[];
+      this.errorPatientId='Please select patientId First';
+      this.addForm.get('doctorId')?.setValue('');
+      this.addForm.get('date')?.setValue('');
+      this.addForm.get('slotNumber')?.setValue('');
+    }else if(doctorId===''){
+      this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+      this.errorPatientId='';
+      this.errorDoctorId='Please select doctorId First';
+      this.addForm.get('date')?.setValue('');
+      this.addForm.get('slotNumber')?.setValue('');
+    }else{
+      this.errorDate='';
+      this.errorDoctorId='';
+      this.errorPatientId='';
+    }
+  }
     
+    filterRemaining2() {
+      const patientId = this.addForm.get('patientId')?.value;
+      const doctorId=this.addForm.get('doctorId')?.value;
+      const date=this.addForm.get('date')?.value;
+      if(patientId===''){
+        this.doctors=[];
+        this.errorPatientId='Please select patientId First';
+        this.addForm.get('doctorId')?.setValue('');
+        this.addForm.get('date')?.setValue('');
+        this.addForm.get('slotNumber')?.setValue('');
+      }else{
+        this.errorDate='';
+        this.errorDoctorId='';
+        this.errorPatientId='';
+      }
+  }
+  filterRemaining1() {
+    const patientId = this.addForm.get('patientId')?.value;
+    const doctorId=this.addForm.get('doctorId')?.value;
+    const date=this.addForm.get('date')?.value;
+      this.errorDate='';
+      this.errorDoctorId='';
+      this.errorPatientId='';
+      this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
   }
 }

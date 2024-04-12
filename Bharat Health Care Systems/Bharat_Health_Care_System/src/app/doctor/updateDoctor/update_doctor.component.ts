@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DoctorService, HospitalService } from 'src/app/service/BHCS.service';
+import { DoctorService, HospitalService } from 'src/app/service/services';
 import { mobileNumberValidator } from '../addDoctor/add_doctor.component';
 import { Doctor, Hospital } from 'src/model/BHCS.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -27,7 +27,7 @@ export class UpdateDoctorComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.hospitals = this.hospitalService.getAllHospitals();
+    this.hospitalService.getAllHospitals().subscribe(data=>this.hospitals=data);
     this.route.paramMap.subscribe(() => {
       this.doctor = history.state.myObject;
       this.updateForm = this.formBuilder.group({
@@ -128,7 +128,7 @@ export class UpdateDoctorComponent implements OnInit {
         mobile: this.updateForm.get('doctorMobile')?.value,
         email: this.updateForm.get('doctorEmail')?.value,
       };
-      this.doctorService.updateDoctor(newDoctor);
+      this.doctorService.updateDoctor(newDoctor).subscribe(data=>console.log(data));
       this.router.navigate(['doctor']);
     } else if (
       this.errorEmail === ' ' &&

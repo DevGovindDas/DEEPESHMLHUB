@@ -2,57 +2,46 @@
   <h5 style="margin: auto">
     Please fill the form and press submit to add an Appointment
   </h5>
-  <form [formGroup]="addForm">
+  <form [formGroup]="addForm" (ngSubmit)="addAppointment()">
     <table class="table table-primary" style="border: 1px solid #bbb">
       <tbody>
         <tr>
           <td><label for="patientId"> Patient Id</label></td>
           <td>
-            <select
-              id="patientId"
-              formControlName="patientId"
-              (change)="filterRemaining()"
-            >
-              <option
-                *ngFor="let patient of patients"
-                [value]="patient.patientId"
-              >
+            <select id="patientId" formControlName="patientId" (change)="filterRemaining1()">
+              <option *ngFor="let patient of patients" [value]="patient.patientId">
                 {{ patient.name }}--Id({{ patient.patientId }})
-              </option></select
-            ><span class="error-message">{{ errorPatientId }}</span>
+              </option>
+            </select><span class="error-message">{{ errorPatientId }}</span>
           </td>
           <td><label for="doctorId"> Doctor Id</label></td>
           <td>
-            <select id="doctorId" formControlName="doctorId">
+            <select id="doctorId" formControlName="doctorId" (change)="filterRemaining2()">
               <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
                 {{ doctor.name }}--Id({{ doctor.doctorId }})
-              </option></select
-            ><span class="error-message">{{ errorDoctorId }}</span>
+              </option>
+            </select><span class="error-message">{{ errorDoctorId }}</span>
           </td>
         </tr>
         <tr>
           <td><label for="date"> Date</label></td>
           <td>
-            <input
-              id="date"
-              type="date"
-              formControlName="date"
-              [min]="minDate"
-              [max]="maxDate"
-            /><span class="error-message">{{ errorDate }}</span>
+            <input id="date" type="date" formControlName="date" [min]="minDate" [max]="maxDate" (change)="filterRemaining3()"/><span
+              class="error-message">{{ errorDate }}</span>
           </td>
 
           <td><label for="slot"> Slot</label></td>
           <td>
-            <select id="slot" formControlName="slotNumber">
+            <select id="slot" formControlName="slotNumber" (change)="filterRemaining4()">
               <option *ngFor="let slot of slotMap" [value]="slot.slotNumber">
                 {{ slot.time }}
-              </option></select
-            ><span class="error-message">{{ errorSlot }}</span>
+              </option>
+            </select><span class="error-message">{{ errorSlot }}</span>
           </td>
         </tr>
         <tr>
-          <td><input type="submit" (click)="addAppointment()" /></td>
+          <td><button type="submit">Submit</button>
+          </td>
           <td></td>
           <td></td>
           <td></td>

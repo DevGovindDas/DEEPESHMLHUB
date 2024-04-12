@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DoctorService, HospitalService } from 'src/app/service/BHCS.service';
+import { DoctorService, HospitalService } from 'src/app/service/services';
 import { Hospital } from 'src/model/BHCS.model';
 
 export function mobileNumberValidator(
@@ -36,7 +36,7 @@ export class AddDoctorComponent {
   errorSpecialization = ' ';
   errorHospitalId = ' ';
   constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.hospitals = this.hospitalService.getAllHospitals();
+    this.hospitalService.getAllHospitals().subscribe(data=>this.hospitals=data);
     this.addForm = formBuilder.group({
       doctorName: ['', [Validators.required]],
       doctorQual: ['', [Validators.required]],
@@ -127,7 +127,7 @@ export class AddDoctorComponent {
         email: this.addForm.get('doctorEmail')?.value,
       };
       console.log(newDoctor, 'Before submitting to service');
-      this.doctorService.addDoctor(newDoctor);
+      this.doctorService.addDoctor(newDoctor).subscribe(data=>console.log('I am value returned from Backend',data));
       this.router.navigate(['doctor']);
     } else if (
       this.errorEmail === ' ' &&
