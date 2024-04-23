@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Appointment, Slot } from 'src/model/BHCS.model';
 import { AppointmentService } from '../service/services';
 import { NavigationExtras, Router } from '@angular/router';
@@ -9,13 +9,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css'],
 })
-export class AppointmentComponent implements OnInit {
+export class AppointmentComponent implements OnInit,OnChanges {
   appointments: Appointment[] = [];
   filteredAppointments: Appointment[] = [];
   slotTimeMap: Slot[] = [];
   appointmentService: AppointmentService = inject(AppointmentService);
   searchAppointment: FormGroup;
-  constructor(private router: Router, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private formBuilder: FormBuilder,private cdr:ChangeDetectorRef) {
     this.searchAppointment = this.formBuilder.group({
       searchKey: [''],
     });
@@ -25,20 +25,21 @@ export class AppointmentComponent implements OnInit {
     });
     this.slotTimeMap = this.appointmentService.getSlotTimeMap();
   }
-
-  ngOnInit(): void {}
-  updateAppointment(appointment?: Appointment) {
-    const navigationExtras: NavigationExtras = {
-      state: { myObject: appointment },
-    };
-    this.router.navigate(['updateAppointment'], navigationExtras);
+  ngOnChanges(changes: SimpleChanges): void {
+   
   }
+
+  ngOnInit(): void {
+
+  }
+ 
   deleteAppointment(id?: string) {
     this.appointmentService.deleteAppointment(id).subscribe(data=>{
       if(data){
-        this.appointments=this.appointments.filter(a=>a.appointmentId!==id);
+        this.filteredAppointments=this.appointments.filter(a=>a.appointmentId!==id);
       }
-    });
+      this.cdr.detectChanges();
+    },error=>{console.log('Error Deleting Row',error)});
   }
   getSlotTime(sno?: number) {
     return this.slotTimeMap.filter((s) => s.slotNumber === sno)[0].time;

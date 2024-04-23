@@ -1,7 +1,13 @@
+import { Timestamp } from "rxjs";
+
 export class User {
   name?: string;
   userName?: string;
   password?: string;
+  role?:string;
+  errorMessage?:string;
+  isLoggedIn?:boolean;
+  sessionId?:string;
 }
 
 export class Doctor {
@@ -27,6 +33,12 @@ export class Patient {
   name?: string;
   mobile?: number;
   email?: string;
+}
+
+export class Review{
+  reviewId?:string;
+  name?:string;
+  review?:string;
 }
 
 export class Appointment {

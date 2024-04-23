@@ -1,78 +1,51 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, catchError, throwError } from 'rxjs';
 import { User } from 'src/model/BHCS.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminLoginService {
-  private adminLoggedIn: boolean = false;
-  private loggedAdmin?: string = '';
+export class LoginService {
   redirectUrl: string = '/';
-  constructor(private router: Router) {}
+  loggedUser:User={
+    name: "None",
+    userName:"_" ,
+    password: "",
+    role:"",
+    isLoggedIn:false,
+    sessionId:"_"
+  };
+  constructor(private router: Router, private httpClient:HttpClient) {}
 
-  private registeredAdmins: User[] = [
-    { name: 'User1', userName: 'user1@x.com', password: 'Pwd1!' },
-    { name: 'User2', userName: 'user2@y.com', password: 'Pwd2!' },
-    { name: 'Test', userName: 't@y.com', password: 'Pw2!' },
-  ];
-  adminLogin(userName: string, password: string): string {
-    for (var i = 0; i < this.registeredAdmins.length; i++) {
-      if (this.registeredAdmins[i].userName === userName) {
-        if (this.registeredAdmins[i].password !== password) return 'IP';
-        else {
-          this.loggedAdmin = this.registeredAdmins[i].name;
-          this.adminLoggedIn = true;
-          return 'Success';
-        }
-      }
+  login(userName: string, password: string):Observable<User>{
+    var user={
+      name: "None",
+      userName:userName ,
+      password: password,
+      role:"",
+      isLoggedIn:false,
+      sessionId:""
     }
-    return 'UDE';
+    return this.httpClient.post("http://localhost:8078/authenticate/login",user);
   }
-  adminLogout() {
-    this.adminLoggedIn = false;
-    this.loggedAdmin = '';
-    this.router.navigate(['login']);
+  logout():Observable<any> {
+    return this.httpClient.get("http://localhost:8078/authenticate/logout/"+this.loggedUser.userName);
   }
-  isAdminLoggedIn(): boolean {
-    return this.adminLoggedIn;
+  isLoggedIn() {
+    return this.httpClient.get("http://localhost:8078/authenticate/isLoggedIn/"+this.loggedUser.userName+"/"+this.loggedUser.sessionId);
   }
-  getLoggedAdmin() {
-    return this.loggedAdmin;
+  getLoggedUser() {
+    return this.loggedUser.name;
   }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UserLoginService {
-  private userLoggedIn: boolean = false;
-  private loggedUser?: string = '';
-  redirectUrl: string = '/';
-  constructor() {}
-
-  private registeredUsers: User[] = [
-    { name: 'User1', userName: 'user1@x.com', password: 'Pwd1!' },
-    { name: 'User2', userName: 'user2@y.com', password: 'Pwd2!' },
-  ];
-  userLogin(userName: string, password: string): string {
-    for (var i = 0; i < this.registeredUsers.length; i++) {
-      if (this.registeredUsers[i].userName === userName) {
-        if (this.registeredUsers[i].password !== password) return 'IP';
-        else {
-          this.loggedUser = this.registeredUsers[i].name;
-          this.userLoggedIn = true;
-          return 'Success';
-        }
-      }
+  addUser(name:string,userName:string,password:string,role:string):Observable<User>{
+    var user={
+      name: name,
+      userName:userName,
+      password: password,
+      role:role
     }
-    return 'UDE';
-  }
-  userLogout() {
-    this.userLoggedIn = false;
-    this.loggedUser = '';
-  }
-  isUserLoggedIn(): boolean {
-    return this.userLoggedIn;
+    return this.httpClient.post("http://localhost:8078/authenticate/addUser",user);
   }
 }

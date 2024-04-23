@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Doctor, Hospital } from 'src/model/BHCS.model';
 import { HospitalService } from '../service/services';
@@ -11,6 +11,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class HospitalComponent implements OnInit {
   hospitals: Hospital[] = [];
+  searchedHospitals:Hospital[]=[];
   hospitalService: HospitalService = inject(HospitalService);
   searchHospital: FormGroup;
 
@@ -18,15 +19,19 @@ export class HospitalComponent implements OnInit {
     this.searchHospital = formBuilder.group({
       searchKey: [''],
     });
-    this.hospitalService.getAllHospitals().subscribe(d=>this.hospitals=d);
+    this.hospitalService.getAllHospitals().subscribe(d=>{
+      this.hospitals=d;
+      this.searchedHospitals=d;
+    }
+    );
   }
 
   ngOnInit(): void {}
 
 
-  searchHospitals(): Hospital[] {
+  searchHospitals(){
     const key= this.searchHospital.get('searchKey')?.value;
-    return this.hospitals.filter(
+     this.searchedHospitals=this.hospitals.filter(
       (hosp) =>
         hosp.hospitalId
           ?.toLocaleString()

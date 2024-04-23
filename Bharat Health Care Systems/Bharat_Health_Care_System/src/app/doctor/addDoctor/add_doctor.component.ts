@@ -127,8 +127,13 @@ export class AddDoctorComponent {
         email: this.addForm.get('doctorEmail')?.value,
       };
       console.log(newDoctor, 'Before submitting to service');
-      this.doctorService.addDoctor(newDoctor).subscribe(data=>console.log('I am value returned from Backend',data));
-      this.router.navigate(['doctor']);
+      this.doctorService.addDoctor(newDoctor).subscribe(data=>
+        {
+          console.log('I am value returned from Backend',data)
+          this.router.navigate(['doctor']);
+    });
+        
+      
     } else if (
       this.errorEmail === ' ' &&
       this.errorMobile === ' ' &&

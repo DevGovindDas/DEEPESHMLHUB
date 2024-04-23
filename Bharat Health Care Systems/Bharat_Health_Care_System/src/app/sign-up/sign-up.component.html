@@ -1,0 +1,98 @@
+<div style="
+      width:100%;
+      border: 1px solid black;
+      display: flex;
+      background-color: beige;
+      justify-content: center;
+      align-items: center;
+    ">
+    <div style="width: 250px">
+        <p style="text-decoration: underline">User Sign Up</p>
+        <form [formGroup]="signUpForm">
+            <table class="table-bordered table table-dark">
+                <tbody>
+                    <tr>
+                        <td style="width: 100px">
+                            <label for="login">Name</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Name" formControlName="name" />
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <span class="error-message"  *ngIf="invalidName != ''">{{ invalidName }}</span>
+                        </td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+
+                        <td style="width: 100px">
+                            <label for="login">UserName(Email)</label>
+                        </td>
+                        <td>
+                            <input type="email" placeholder="Login Id" formControlName="loginId" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <span class="error-message" *ngIf="invalidULID != ''">{{ invalidULID }}</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td style="width: 100px">
+                            <label for="login">Password</label>
+                        </td>
+                        <td>
+                            <input type="password" placeholder="Password" formControlName="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="error-message"  *ngIf="invalidUPWD != ''">{{ invalidUPWD }}</span>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+
+                        <td style="width: 100px">
+                            <label for="login">User Role</label>
+                        </td>
+                        <td>
+                            <select [value]="" formControlName="role">
+                                <option value="user">user</option>
+                                <option value="admin">admin</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <span class="error-message" *ngIf="invalidRole != ''">{{ invalidRole }}</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td >
+                            <span class="error-message" *ngIf="userAddStatus != ''">{{ userAddStatus }}</span>
+                        </td>
+                        <td></td>
+                      
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" (click)="userSignUp()" />
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

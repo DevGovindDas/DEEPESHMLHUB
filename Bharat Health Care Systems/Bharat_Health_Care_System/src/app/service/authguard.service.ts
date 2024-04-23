@@ -6,55 +6,37 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AdminLoginService, UserLoginService } from './Login.service';
+import { Observable, catchError, first, map, of } from 'rxjs';
+import { LoginService } from './Login.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AdminAuthguardService implements CanActivate {
-  private adminLoginService: AdminLoginService = inject(AdminLoginService);
+export class AuthguardService implements CanActivate {
+  private loginService: LoginService = inject(LoginService);
   constructor(private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    if (this.adminLoginService.isAdminLoggedIn()) {
-      return true;
-    } else {
-      this.adminLoginService.redirectUrl = state.url;
-      this.router.navigate(['login']);
-      return false;
+    Observable<boolean>
+     {
+      return this.loginService.isLoggedIn().pipe(map((data)=>{
+      if (data===true) {
+        console.log(data,'Testing')
+        return true;
+      } else {
+        this.loginService.redirectUrl = state.url;
+        this.router.navigate(['']);
+        return false;
+      }
     }
-  }
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UserAuthguardService implements CanActivate {
-  constructor(
-    private userLoginService: UserLoginService,
-    private router: Router
-  ) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    if (this.userLoginService.isUserLoggedIn()) {
-      return true;
-    } else {
-      this.userLoginService.redirectUrl = state.url;
-      this.router.navigate(['login']);
-      return false;
-    }
+    ),
+     catchError(error=>{
+      this.router.navigate(['']);
+      return of(false);
+     }) );
+  
   }
 }

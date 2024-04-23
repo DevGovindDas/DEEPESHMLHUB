@@ -1,8 +1,15 @@
 package com.metlife.controller;
 
+import com.metlife.dto.AppointmentDTO;
 import com.metlife.entity.Appointment;
+import com.metlife.exceptions.AppointmentNotFoundException;
 import com.metlife.repository.AppointmentRepository;
+import com.metlife.service.AppointmentService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,40 +17,37 @@ import java.util.List;
 @RequestMapping("/appointment")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AppointmentController {
-
     @Autowired
-    public AppointmentRepository appointmentRepository;
+    private AppointmentService appointmentService;
 
     @GetMapping
-    public List<Appointment> getAllAppointments(){
-        return appointmentRepository.findAll();
+    public List<AppointmentDTO> getAllAppointments(){
+        return appointmentService.getAllAppointments();
     }
 
     @GetMapping("/{id}")
-    public Appointment getAppointment(@PathVariable String id){
-        return appointmentRepository.findByAppointmentId(id);
+    public ResponseEntity<AppointmentDTO> getAppointment(@PathVariable String id) throws AppointmentNotFoundException {
+        return ResponseEntity.ok().body(appointmentService.getAppointment(id));
     }
 
     @PostMapping
-    public Appointment addAppointment(@RequestBody Appointment appointment){
-        return appointmentRepository.save(appointment);
-    }
-
-    @PutMapping
-    public Appointment updateAppointment(@RequestBody Appointment appointment){
-        Appointment appointment1=appointmentRepository.findByAppointmentId(appointment.getAppointmentId());
-        appointment1.setPatientId(appointment.getPatientId());
-        appointment1.setDoctorId(appointment.getDoctorId());
-        appointment1.setDate(appointment.getDate());
-        appointment1.setSlotNumber(appointment.getSlotNumber());
-
-        appointmentRepository.save(appointment1);
-        return appointment1;
+    public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody Appointment appointment){
+        return ResponseEntity.ok().body(appointmentService.addAppointment(appointment));
     }
 
     @DeleteMapping("/{id}")
     public void deleteAppointment(@PathVariable String id){
-       appointmentRepository.deleteById(appointmentRepository.findByAppointmentId(id).getId());
+        appointmentService.deleteAppointment(id);
+    }
+
+    @DeleteMapping("/deleteByDoctor/{doctorId}")
+    public void deleteAppointmentByDoctorId(@PathVariable String doctorId){
+        appointmentService.deleteAppointmentByDoctorId(doctorId);
+    }
+
+    @DeleteMapping("/deleteByPatient/{patientId}")
+    public void deleteAppointmentByPatientId(@PathVariable String patientId){
+        appointmentService.deleteAppointmentByPatientId(patientId);
     }
 
 }

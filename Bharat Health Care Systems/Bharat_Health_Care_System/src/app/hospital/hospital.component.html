@@ -31,7 +31,7 @@
         <th scope="col">Delete</th>
       </thead>
       <tbody>
-        <tr *ngFor="let hospital of hospitals; let i = index">
+        <tr *ngFor="let hospital of searchedHospitals; let i = index">
           <td>{{ hospital.hospitalId }}</td>
           <td>{{ hospital.name }}</td>
           <td>{{ hospital.address }}</td>

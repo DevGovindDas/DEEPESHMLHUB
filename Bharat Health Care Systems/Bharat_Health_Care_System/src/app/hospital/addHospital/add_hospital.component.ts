@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -29,7 +29,7 @@ export class AddHospitalComponent {
   errorAddress = ' ';
   addForm: FormGroup;
   hospitalService: HospitalService = inject(HospitalService);
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router,private cdr:ChangeDetectorRef) {
     this.addForm = formBuilder.group({
       hospitalName: ['', [Validators.required]],
       hospitalAddress: ['', [Validators.required]],
@@ -84,8 +84,12 @@ export class AddHospitalComponent {
         address: this.addForm.get('hospitalAddress')?.value,
         admitCapacity: this.addForm.get('hospitalCapacity')?.value,
       };
-      this.hospitalService.addHospital(newHospital).subscribe(a=>console.log(a));
-      this.router.navigate(['hospital']);
+      this.hospitalService.addHospital(newHospital).subscribe(a=>{
+        console.log(a)
+        this.cdr.detectChanges();
+        this.router.navigate(['hospital']);
+      });
+      
     } else if (
       this.errorCapacity === ' ' &&
       this.errorAddress === ' ' &&

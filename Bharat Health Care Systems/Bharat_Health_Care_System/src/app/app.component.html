@@ -1,35 +1,30 @@
-<div class="container-fluid">
+<div style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;overflow: hidden;display: flex;flex-direction: column;">
   <div class="row main-title">
     <h2 style="font-weight: 800; font-size: 50px">
       Bharat Health Care Services
     </h2>
   </div>
-  <router-outlet></router-outlet>
+  <div class="content">
+      <router-outlet></router-outlet>
+  </div>
 </div>
-<a class="home-button" [routerLink]="'home'"><i >Home</i></a>
+<a class="home-button" (click)="homeNavigation()"><i>Home</i></a>
 <button class="login-logout-button" (click)="showLoginDetails()">
-  {{ getAdminLogo() }}
+  {{ getLogo() }}
 </button>
 <div class="userProfileDetails" *ngIf="profileVisible">
-  <div
-    style="
+  <div style="
       display: flex;
       flex-direction: column;
       margin: auto;
       align-items: center;
-    "
-  >
+    ">
     <h6>
       Logged User:<span>{{
-        getAdminLogo() === "" ? "None" : getAdminLogo()
-      }}</span>
+        getLogo()==="" ? "None" : getLogo()
+        }}</span>
     </h6>
-    <button
-      *ngIf="getAdminLogo() !== ''"
-      (click)="adminLogOut()"
-      class="btn btn-primary"
-      style="width: fit-content"
-    >
+    <button *ngIf="getLogo() !== ''" (click)="logOut()" class="btn btn-primary" style="width: fit-content">
       Logout
     </button>
   </div>

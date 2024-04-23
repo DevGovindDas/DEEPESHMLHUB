@@ -15,6 +15,4 @@ export class PatientComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  updatePatient(patient: Patient) {}
-  deletePatient(id?: string) {}
 }

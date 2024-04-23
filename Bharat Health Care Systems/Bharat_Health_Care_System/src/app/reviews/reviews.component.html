@@ -1,0 +1,21 @@
+<div class="container">
+    <table
+      class="table table-bordered table-primary"
+      style="border: 1px solid #bbb"
+    >
+      <thead>
+        <th scope="col">Review Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Review</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews; let i = index">
+          <td>{{ review.reviewId }}</td>
+          <td>{{ review.name }}</td>
+          <td>{{ review.review }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -27,6 +27,8 @@ export class AddAppointmentComponent {
   patientService: PatientService = inject(PatientService);
   slotMap: Slot[] = [];
   doctors: Doctor[] = [];
+  avalibleDoctors:Doctor[]=[];
+  avalibleSlots:Slot[]=[];
   patients: Patient[] = [];
   appointments:Appointment[]=[];
   filteredAppointments:Appointment[]=[];
@@ -119,11 +121,9 @@ export class AddAppointmentComponent {
       };
       console.log(newAppointment);
       this.appointmentService.addAppointment(newAppointment).subscribe(data=>{
-        if(data){
-        this.appointments=[...this.appointments,newAppointment]
-        }
+        this.router.navigate(['appointment']);
       });
-      this.router.navigate(['appointment']);
+      
     } else if (
       this.errorDate === ' ' &&
       this.errorDoctorId === ' ' &&
@@ -184,6 +184,18 @@ export class AddAppointmentComponent {
       this.errorDate='';
       this.errorDoctorId='';
       this.errorPatientId='';
+      this.avalibleSlots=[];
+      var patientAppointments=this.appointments.filter(a=>(a.patientId===patientId)&&(a.doctorId===doctorId)&&(a.date===date));
+      for(var i=0;i<this.slotMap.length;i++){
+        if(patientAppointments.filter(a=>a.slotNumber===this.slotMap[i].slotNumber).length===0){
+          this.avalibleSlots.push(this.slotMap[i])
+        }
+      }
+      if(this.avalibleSlots.length===0){
+        this.errorSlot='Patient has all slots with this doctor on this date booked'
+      }else{
+        this.errorSlot='';
+      }
     }
   }
     
@@ -211,5 +223,16 @@ export class AddAppointmentComponent {
       this.errorDoctorId='';
       this.errorPatientId='';
       this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+      var patientAppointments=this.appointments.filter(a=>a.patientId===patientId);
+      this.avalibleDoctors=[];
+      for(var i=0;i<this.doctors.length;i++){
+        if(patientAppointments.filter(a=>a.doctorId===this.doctors[i].doctorId).length<240){
+          this.avalibleDoctors.push(this.doctors[i])
+        }else{
+          this.avalibleDoctors=[];
+          this.errorDoctorId='Patient need to cancel one appointment to book one more';
+          break;
+        }
+      }      
   }
 }

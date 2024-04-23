@@ -13,7 +13,7 @@
       style="margin: auto"
       (click)="addAppointment()"
     >
-      Add Appointment
+      Book Appointment
     </button>
   </div>
   <table
@@ -26,8 +26,7 @@
       <th scope="col">Doctor Id</th>
       <th scope="col">Date</th>
       <th scope="col">Time</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
+      <th scope="col">Cancel</th>
     </thead>
     <tbody>
       <tr *ngFor="let appointment of filteredAppointments; let i = index">
@@ -38,18 +37,10 @@
         <td>{{ getSlotTime(appointment.slotNumber) }}</td>
         <td>
           <button
-            (click)="updateAppointment(appointment)"
-            class="btn btn-primary"
-          >
-            Update
-          </button>
-        </td>
-        <td>
-          <button
             (click)="deleteAppointment(appointment.appointmentId)"
             class="btn btn-danger"
           >
-            Delete
+            Cancel
           </button>
         </td>
       </tr>

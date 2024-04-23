@@ -1,12 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 .main-title {
   height: 100px;
+  width: 100%;
   background-color: yellow;
   color: black;
   text-align: center;
   vertical-align: center;
   margin: 0;
   align-content: center;
+  flex:0 0 auto;
 }
 
 .login-logout-button {

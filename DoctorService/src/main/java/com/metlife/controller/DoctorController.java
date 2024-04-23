@@ -1,59 +1,50 @@
 package com.metlife.controller;
 
+import com.metlife.dto.DoctorDTO;
 import com.metlife.entity.Doctor;
-import com.metlife.repository.DoctorRepository;
+import com.metlife.exceptions.DoctorNotFoundException;
+import com.metlife.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class DoctorController {
+public class DoctorController{
 
     @Autowired
-    public DoctorRepository doctorRepository;
+    private DoctorService doctorService;
 
 
     @GetMapping("doctor")
-    public List<Doctor> getAllDoctors(){
-        System.out.println("I reached getAllDoctors()********************");
-        return doctorRepository.findAll();
+    public List<DoctorDTO> getAllDoctors(){
+        return doctorService.getAllDoctors();
     }
 
     @GetMapping("doctor/{id}")
-    public Doctor getDoctor(@PathVariable String id){
-        System.out.println("I reached GetById********************");
-        return doctorRepository.findByDoctorId(id);
+    public ResponseEntity<DoctorDTO> getDoctor(@PathVariable String id) throws DoctorNotFoundException {
+        return ResponseEntity.ok().body(doctorService.getDoctor(id));
     }
 
     @PostMapping("doctor")
-    public Doctor addDoctor(@RequestBody Doctor doctor){
-        System.out.println("I reached addDoctor()********************");
-        return doctorRepository.save(doctor);
+    public ResponseEntity<DoctorDTO> addDoctor(@RequestBody Doctor doctor){
+        return ResponseEntity.ok().body(doctorService.addDoctor(doctor));
     }
 
     @PutMapping("doctor")
-    public Doctor updateDoctor(@RequestBody Doctor doctor){
-        System.out.println("I reached UPDATE********************");
-        Doctor doctor1=doctorRepository.findByDoctorId(doctor.getDoctorId());
-        doctor1.setName(doctor.getName());
-        doctor1.setEmail(doctor.getEmail());
-        doctor1.setRating(doctor.getRating());
-        doctor1.setMobile(doctor.getMobile());
-        doctor1.setQualification(doctor.getQualification());
-        doctor1.setSpeciality(doctor.getSpeciality());
-        doctorRepository.save(doctor1);
-        return doctor1;
+    public ResponseEntity<DoctorDTO> updateDoctor(@RequestBody Doctor doctor) throws DoctorNotFoundException {
+        return ResponseEntity.ok().body(doctorService.updateDoctor(doctor));
     }
 
     @DeleteMapping("doctor/{id}")
-    public Doctor deleteDoctor(@PathVariable String id){
-        System.out.println("I reached DELETE********************");
-       Doctor doctor=doctorRepository.findByDoctorId(id);
-       doctorRepository.deleteById(doctor.getId());
-       return doctor;
+    public ResponseEntity<DoctorDTO> deleteDoctor(@PathVariable String id) throws DoctorNotFoundException {
+        return ResponseEntity.ok().body(doctorService.deleteDoctor(id));
     }
 
+    @DeleteMapping("/deleteByHospitalId/{hospitalId}")
+    public void deleteDoctorByHospitalId(@PathVariable String hospitalId){
+        doctorService.deleteDoctorByHospitalId(hospitalId);
+    }
 }

@@ -8,8 +8,6 @@
       <th scope="col">Name</th>
       <th scope="col">Mobile</th>
       <th scope="col">Email</th>
-      <th scope="col">Update</th>
-      <th scope="col">Delete</th>
     </thead>
     <tbody>
       <tr *ngFor="let patient of patients; let i = index">
@@ -17,19 +15,7 @@
         <td>{{ patient.name }}</td>
         <td>{{ patient.mobile }}</td>
         <td>{{ patient.email }}</td>
-        <td>
-          <button (click)="updatePatient(patient)" class="btn btn-primary">
-            Update
-          </button>
-        </td>
-        <td>
-          <button
-            (click)="deletePatient(patient.patientId)"
-            class="btn btn-danger"
-          >
-            Delete
-          </button>
-        </td>
+        
       </tr>
     </tbody>
   </table>

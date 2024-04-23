@@ -128,8 +128,10 @@ export class UpdateDoctorComponent implements OnInit {
         mobile: this.updateForm.get('doctorMobile')?.value,
         email: this.updateForm.get('doctorEmail')?.value,
       };
-      this.doctorService.updateDoctor(newDoctor).subscribe(data=>console.log(data));
-      this.router.navigate(['doctor']);
+      this.doctorService.updateDoctor(newDoctor).subscribe(data=>{console.log(data);
+        this.router.navigate(['doctor']);
+      });
+      
     } else if (
       this.errorEmail === ' ' &&
       this.errorMobile === ' ' &&

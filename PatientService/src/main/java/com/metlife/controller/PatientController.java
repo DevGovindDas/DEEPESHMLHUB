@@ -1,7 +1,9 @@
 package com.metlife.controller;
 
+import com.metlife.dto.PatientDTO;
 import com.metlife.entity.Patient;
-import com.metlife.repository.PatientRepository;
+import com.metlife.exceptions.PatientNotFoundException;
+import com.metlife.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,37 +15,32 @@ import java.util.List;
 public class PatientController {
 
     @Autowired
-    public PatientRepository patientRepository;
+    PatientService patientService;
 
     @GetMapping
-    public List<Patient> getAllPatients(){
-        return patientRepository.findAll();
+    public List<PatientDTO> getAllPatients(){
+        return patientService.getAllPatients();
     }
 
     @GetMapping("/{id}")
-    public Patient getPatient(@PathVariable String id){
-        return patientRepository.findByPatientId(id);
+    public PatientDTO getPatient(@PathVariable String id) throws PatientNotFoundException {
+        return patientService.getPatient(id);
     }
 
     @PostMapping
-    public Patient addPatient(@RequestBody Patient patient){
-        return patientRepository.save(patient);
+    public PatientDTO addPatient(@RequestBody Patient patient){
+        return patientService.addPatient(patient);
     }
 
     @PutMapping
-    public Patient updatePatient(@RequestBody Patient patient){
-        Patient patient1=patientRepository.findByPatientId(patient.getPatientId());
-        patient1.setName(patient.getName());
-        patient1.setEmail(patient.getEmail());
-        patient1.setMobile(patient.getMobile());
-        patientRepository.save(patient1);
-        return patient1;
+    public PatientDTO updatePatient(@RequestBody Patient patient) throws PatientNotFoundException {
+
+        return patientService.updatePatient(patient);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePatient(@PathVariable String id){
-        Patient patient=patientRepository.findByPatientId(id);
-        patientRepository.deleteById(patient.getId());
+    public void deletePatient(@PathVariable String id) throws PatientNotFoundException {
+       patientService.deletePatient(id);
     }
 
 }

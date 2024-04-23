@@ -1,9 +1,14 @@
 package com.metlife.controller;
 
+import com.metlife.dto.HospitalDTO;
 import com.metlife.entity.Hospital;
+import com.metlife.exceptions.HospitalNotFoundException;
 import com.metlife.repository.HospitalRepository;
+import com.metlife.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -13,39 +18,35 @@ import java.util.List;
 public class HospitalController {
 
     @Autowired
-    public HospitalRepository hospitalRepository;
+    private HospitalService hospitalService;
+
+
+    private final RestTemplate restTemplate=new RestTemplate();
 
     @GetMapping
-    public List<Hospital> getAllHospitals(){
-        return hospitalRepository.findAll();
+    public List<HospitalDTO> getAllHospitals(){
+        return hospitalService.getAllHospitals();
     }
 
     @GetMapping("/{id}")
-    public Hospital getHospital(@PathVariable String id){
-        return hospitalRepository.findByHospitalId(id);
+    public ResponseEntity<HospitalDTO> getHospital(@PathVariable String id) throws HospitalNotFoundException {
+        return ResponseEntity.ok().body(hospitalService.getHospital(id));
     }
 
     @PostMapping
-    public Hospital addHospital(@RequestBody Hospital hospital){
-        return hospitalRepository.save(hospital);
+    public ResponseEntity<HospitalDTO> addHospital(@RequestBody Hospital hospital){
+        return ResponseEntity.ok().body(hospitalService.addHospital(hospital));
     }
 
     @PutMapping
-    public Hospital updateHospital(@RequestBody Hospital hospital){
-        System.out.println("I am in updateHospital()****************************");
-        Hospital hospital1=hospitalRepository.findByHospitalId(hospital.getHospitalId());
-        hospital1.setName(hospital.getName());
-        hospital1.setAddress(hospital.getAddress());
-        hospital1.setAdmitCapacity(hospital.getAdmitCapacity());
-        hospitalRepository.save(hospital1);
-        return hospital1;
+    public ResponseEntity<HospitalDTO> updateHospital(@RequestBody Hospital hospital) throws HospitalNotFoundException {
+        return ResponseEntity.ok().body(hospitalService.updateHospital(hospital));
+
     }
 
     @DeleteMapping("/{id}")
-    public Hospital deleteHospital(@PathVariable String id){
-        Hospital hospital=hospitalRepository.findByHospitalId(id);
-        hospitalRepository.deleteById(hospital.getId());
-        return hospital;
+    public void deleteHospital(@PathVariable String id) throws HospitalNotFoundException {
+        hospitalService.deleteHospital(id);
     }
 
 }

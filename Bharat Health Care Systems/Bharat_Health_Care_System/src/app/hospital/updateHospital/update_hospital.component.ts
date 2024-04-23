@@ -85,8 +85,11 @@ export class UpdateHospitalComponent implements OnInit {
         admitCapacity: this.updateForm.get('hospitalCapacity')?.value,
       };
       console.log(newHospital, 'Before Service Call');
-      this.hospitalService.updateHospital(newHospital).subscribe(d=>console.log(d));
-      this.router.navigate(['hospital']);
+      this.hospitalService.updateHospital(newHospital).subscribe(d=>{
+        console.log(d)
+        this.router.navigate(['hospital']);
+    });
+      
     } else if (
       this.errorCapacity === ' ' &&
       this.errorAddress === ' ' &&

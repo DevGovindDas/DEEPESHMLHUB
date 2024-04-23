@@ -11,6 +11,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class DoctorComponent implements OnInit,OnChanges {
   doctors: Doctor[] = [];
+  searchedDoctors:Doctor[]=[];
   hospitals: Hospital[] = [];
   doctorService: DoctorService = inject(DoctorService);
   hospitalService: HospitalService = inject(HospitalService);
@@ -20,7 +21,10 @@ export class DoctorComponent implements OnInit,OnChanges {
     this.searchDoctor = formBuilder.group({
       searchKey: [''],
     });
-    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
+    this.doctorService.getAllDoctors().subscribe(data=>{
+      this.doctors=data;
+      this.searchedDoctors=data;
+    });
     this.hospitalService.getAllHospitals().subscribe(data=>this.hospitals=data);
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -29,12 +33,11 @@ export class DoctorComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
     this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
-    this.doctorService.getAllDoctors().subscribe(data=>this.doctors=data);
   }
 
   searchDoctors() {
     var key=this.searchDoctor.get('searchKey')?.value;
-    this.doctors= this.doctors.filter(
+    this.searchedDoctors= this.doctors.filter(
       (doc) =>
         doc.doctorId
           ?.toLocaleString()

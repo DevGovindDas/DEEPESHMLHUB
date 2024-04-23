@@ -17,6 +17,9 @@ import { AddHospitalComponent } from './hospital/addHospital/add_hospital.compon
 import { UpdateHospitalComponent } from './hospital/updateHospital/update_hospital.component';
 import { AddAppointmentComponent } from './appointment/addApointment/add_appointment.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { UserHomeComponent } from './user-home/user-home.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { HttpClientModule } from '@angular/common/http';
     UpdateDoctorComponent,
     AddHospitalComponent,
     UpdateHospitalComponent,
-    AddAppointmentComponent
+    AddAppointmentComponent,
+    ReviewsComponent,
+    UserHomeComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

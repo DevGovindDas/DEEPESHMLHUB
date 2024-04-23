@@ -17,7 +17,7 @@
           <td><label for="doctorId"> Doctor Id</label></td>
           <td>
             <select id="doctorId" formControlName="doctorId" (change)="filterRemaining2()">
-              <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+              <option *ngFor="let doctor of avalibleDoctors" [value]="doctor.doctorId">
                 {{ doctor.name }}--Id({{ doctor.doctorId }})
               </option>
             </select><span class="error-message">{{ errorDoctorId }}</span>
@@ -33,7 +33,7 @@
           <td><label for="slot"> Slot</label></td>
           <td>
             <select id="slot" formControlName="slotNumber" (change)="filterRemaining4()">
-              <option *ngFor="let slot of slotMap" [value]="slot.slotNumber">
+              <option *ngFor="let slot of avalibleSlots" [value]="slot.slotNumber">
                 {{ slot.time }}
               </option>
             </select><span class="error-message">{{ errorSlot }}</span>

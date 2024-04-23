@@ -72,6 +72,18 @@ export class PatientService {
   }
 }
 
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ReviewService {
+  constructor(private httpClient:HttpClient) {}
+  
+  getAllreviews():Observable<any> {
+    return this.httpClient.get("http://localhost:8082/review");
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })

@@ -8,62 +8,80 @@ import { PatientComponent } from './patient/patient.component';
 import { HospitalComponent } from './hospital/hospital.component';
 import { AddDoctorComponent } from './doctor/addDoctor/add_doctor.component';
 import { UpdateDoctorComponent } from './doctor/updateDoctor/update_doctor.component';
-import { AdminAuthguardService } from './service/authguard.service';
 import { AddHospitalComponent } from './hospital/addHospital/add_hospital.component';
 import { UpdateHospitalComponent } from './hospital/updateHospital/update_hospital.component';
 import { AddAppointmentComponent } from './appointment/addApointment/add_appointment.component';
+import { AuthguardService } from './service/authguard.service';
+import { UserHomeComponent } from './user-home/user-home.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const configuredRoutes: Routes = [
-  { path: '', component: LoginPageComponent },
+  { path: '',
+    component: LoginPageComponent },
+  { 
+    path: 'signUp',
+    component: SignUpComponent
+  },
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
+  },
+  {
+    path: 'userHome',
+    component: UserHomeComponent,
+    canActivate: [AuthguardService],
+  },
+  {
+    path: 'reviews',
+    component: ReviewsComponent,
+    canActivate: [AuthguardService],
   },
   {
     path: 'doctor',
     component: DoctorComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'appointment',
     component: AppointmentComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'addAppointment',
     component: AddAppointmentComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'patient',
     component: PatientComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'hospital',
     component: HospitalComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'addDoctor',
     component: AddDoctorComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'updateDoctor',
     component: UpdateDoctorComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'addHospital',
     component: AddHospitalComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   {
     path: 'updateHospital',
     component: UpdateHospitalComponent,
-    canActivate: [AdminAuthguardService],
+    canActivate: [AuthguardService],
   },
   { path: '**', component: LoginPageComponent },
 ];
