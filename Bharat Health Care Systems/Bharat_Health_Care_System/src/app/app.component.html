@@ -1,6 +1,6 @@
 <div style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;overflow: hidden;display: flex;flex-direction: column;">
   <div class="row main-title">
-    <h2 style="font-weight: 800; font-size: 50px">
+    <h2 style="font-weight: 600; font-size: 20px">
       Bharat Health Care Services
     </h2>
   </div>
@@ -8,10 +8,10 @@
       <router-outlet></router-outlet>
   </div>
 </div>
-<a class="home-button" (click)="homeNavigation()"><i>Home</i></a>
-<button class="login-logout-button" (click)="showLoginDetails()">
+<a *ngIf="loginService.getLoggedUser()!=='None'" class="home-button" (click)="homeNavigation()">Home</a>
+<a *ngIf="loginService.getLoggedUser()!=='None'" class="home-button" style="right: 20px;" (click)="showLoginDetails()">
   {{ getLogo() }}
-</button>
+</a>
 <div class="userProfileDetails" *ngIf="profileVisible">
   <div style="
       display: flex;
@@ -24,7 +24,7 @@
         getLogo()==="" ? "None" : getLogo()
         }}</span>
     </h6>
-    <button *ngIf="getLogo() !== ''" (click)="logOut()" class="btn btn-primary" style="width: fit-content">
+    <button *ngIf="getLogo() !== ''" (click)="logOut()" class="btn btn-sm btn-primary" style="width: fit-content">
       Logout
     </button>
   </div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("doctor")
 @CrossOrigin(origins = "http://localhost:4200")
 public class DoctorController{
 
@@ -18,27 +19,27 @@ public class DoctorController{
     private DoctorService doctorService;
 
 
-    @GetMapping("doctor")
+    @GetMapping
     public List<DoctorDTO> getAllDoctors(){
         return doctorService.getAllDoctors();
     }
 
-    @GetMapping("doctor/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DoctorDTO> getDoctor(@PathVariable String id) throws DoctorNotFoundException {
         return ResponseEntity.ok().body(doctorService.getDoctor(id));
     }
 
-    @PostMapping("doctor")
+    @PostMapping
     public ResponseEntity<DoctorDTO> addDoctor(@RequestBody Doctor doctor){
         return ResponseEntity.ok().body(doctorService.addDoctor(doctor));
     }
 
-    @PutMapping("doctor")
+    @PutMapping
     public ResponseEntity<DoctorDTO> updateDoctor(@RequestBody Doctor doctor) throws DoctorNotFoundException {
         return ResponseEntity.ok().body(doctorService.updateDoctor(doctor));
     }
 
-    @DeleteMapping("doctor/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<DoctorDTO> deleteDoctor(@PathVariable String id) throws DoctorNotFoundException {
         return ResponseEntity.ok().body(doctorService.deleteDoctor(id));
     }

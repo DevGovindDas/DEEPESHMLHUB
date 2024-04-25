@@ -93,7 +93,7 @@ export class LoginPageComponent implements OnInit {
         this.loginForm.controls['password'].errors['invalidPassword']
       )
         this.invalidUPWD =
-          'Password must contain atlease one Upper, one Lower Case letter and one digit and one special character';
+          'Password must contain atlease one Upper, one Lower Case letter, one digit and one special character';
       if (
         this.loginForm.controls['password'].errors &&
         this.loginForm.controls['password'].errors['required']

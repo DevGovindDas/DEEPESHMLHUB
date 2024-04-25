@@ -19,6 +19,7 @@ export class AppComponent {
     this.profileVisible = !this.profileVisible;
   }
   logOut() {
+    this.profileVisible = !this.profileVisible;
     this.loginService.logout().subscribe(data=>{
       this.loginService.loggedUser.name='None';
       this.router.navigate(['login']);

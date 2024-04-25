@@ -1,14 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 .main-title {
-  height: 100px;
+  height: 50px;
   width: 100%;
-  background-color: yellow;
+  background-color: #a4ce4e;
   color: black;
   text-align: center;
   vertical-align: center;
   margin: 0;
   align-content: center;
   flex:0 0 auto;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .login-logout-button {
@@ -42,19 +44,30 @@
 .error-message {
   color: red;
   font-style: italic;
+  font-size: 12px;
 }
 
 .home-button{
   position: fixed;
-  left: 20px;
-  top: 20px;
-  width: 60px;
-  height: 60px;
+  /* width: 60px; */
+  /* height: 60px; */
   color: white;
-  font-size: 20px;
-  background-color: green;
-  border-radius: 40px;
+  margin: 10px;
+  font-size: 14px;
+  padding: 5px 10px;
+  background-color: #0090d9;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+}
+
+.panel{
+      border-radius: 30px;
+      margin: 5px;
+      display: flex;
+      background-color: #eeeeee;
+      justify-content: center;
+      align-items: center;
 }
